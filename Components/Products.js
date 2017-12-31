@@ -2,17 +2,22 @@ import React from 'react'
 import { ScrollView, View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
 
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+
 import { Icon } from '../App'
 
 const Products = ({
-
-}) => (
+    data
+}) => {
+    console.log(data)
+    return(
     <ScrollView contentContainerStyle={styles.contentContainer}>
         
         <LinearGradient elevation={5} style={styles.product} colors={['#5FFCFF', '#43FF9E']} start={[0.1, 1.0]} end={[1.0, 0.1]}>
             <Image source={require('../Images/salad2.jpg')} style={styles.img} />
             <View style={styles.productDescription}>
-                <Text style={styles.productName}>Prawn Salad</Text>
+                <Text style={styles.productName}>firstName</Text>
                 <Text style={styles.productPrice}>Price: 5$</Text>
                 
                 <View style={styles.productButtons}>
@@ -86,7 +91,7 @@ const Products = ({
         </LinearGradient>
 
     </ScrollView>
-)
+)}
 
 const styles = StyleSheet.create({
     contentContainer: {
@@ -140,4 +145,12 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Products
+const q = gql`
+    query users {
+        users {
+            firstName
+        }
+    }
+`
+
+export default graphql(q)(Products)

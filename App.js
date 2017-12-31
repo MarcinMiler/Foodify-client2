@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import { Font } from 'expo'
 
+import { ApolloProvider } from 'react-apollo'
+import { client } from './apollo'
+
 import { createIconSetFromIcoMoon } from '@expo/vector-icons'
 import icoMoonConfig from './selection.json'
 export const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
@@ -25,7 +28,11 @@ class App extends Component {
 
   render() {
     if(!this.state.fontLoaded) return null
-    return <AppNav />
+    return(
+      <ApolloProvider client={client}>
+        <AppNav />
+      </ApolloProvider>
+    )
   }
 }
 
