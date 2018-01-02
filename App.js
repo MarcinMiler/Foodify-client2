@@ -10,6 +10,7 @@ import icoMoonConfig from './selection.json'
 export const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
 
 import AppNav from './Components/AppNavigator'
+import LoginContainer from './Containers/LoginContainer'
 
 class App extends Component {
 
@@ -30,7 +31,7 @@ class App extends Component {
     if(!this.state.fontLoaded) return null
     return(
       <ApolloProvider client={client}>
-        <AppNav />
+        <LoginContainer />
       </ApolloProvider>
     )
   }
