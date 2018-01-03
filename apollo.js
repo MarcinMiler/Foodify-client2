@@ -6,10 +6,13 @@ import { setContext } from 'apollo-link-context'
 const httpLink = new HttpLink({ uri: 'http://192.168.0.106:4000/graphql' })
 
 const authLink = setContext((_, { headers }) => {
+
+  const getToken = async () => await AsyncStorage.getItem('token')
+
     return {
       headers: {
         ...headers,
-        'x-token': 'token'
+        'x-token': getToken()
       }
     }
 })

@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import Login from '../Components/Login'
+import Register from '../Components/Register'
+
+const LoginNavigator = StackNavigator({
+    Login: {
+        screen: Login
+    },
+    Register: {
+        screen: Register
+    },
+},{
+    headerMode: 'none',
+})
 
 class LoginContainer extends Component {
 
     state = {
-        loginActive: true,
         loginEmail: '',
         loginPassword: '',
         registerFirstName: '',
@@ -33,11 +45,11 @@ class LoginContainer extends Component {
                     password: loginPassword
                 },
             })
-            
+            console.log(loginResponse, 'login')
             const { ok, token, error } = loginResponse.data.login
             if(ok) {
-                localStorage.setItem('token', token)
-                this.props.history.push('/app')
+                await AsyncStorage.setItem('token', token)
+                this.props.setToken(token)
             } else this.setState({ messageLoginError: { error: true, messages: [error.message] } })
         }
     }
@@ -105,8 +117,9 @@ class LoginContainer extends Component {
     }
 
     render() {
+        console.log(this.state)
         return(
-            <Login login={this.login} register={this.register} changeState={this.handleChangeState} state={this.state} />
+            <LoginNavigator screenProps={{ login: this.login, register: this.register, state: this.state, changeState: this.handleChangeState }} />
         )
     }
 }

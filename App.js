@@ -15,7 +15,18 @@ import LoginContainer from './Containers/LoginContainer'
 class App extends Component {
 
   state = {
-    fontLoaded: false
+    fontLoaded: false,
+    token: ''
+  }
+
+  setToken = token => this.setState({ token })
+
+  async componentWillMount() {
+    try {
+      const t = await AsyncStorage.getItem('token')
+      console.log(t, 't')
+      if(t) this.setState({ token: t })
+    } catch(err) {}
   }
 
   async componentDidMount() {
@@ -31,7 +42,7 @@ class App extends Component {
     if(!this.state.fontLoaded) return null
     return(
       <ApolloProvider client={client}>
-        <LoginContainer />
+        { this.state.token ? <AppNav /> : <LoginContainer setToken={this.setToken} /> }
       </ApolloProvider>
     )
   }

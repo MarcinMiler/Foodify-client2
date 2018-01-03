@@ -2,7 +2,7 @@ import React from 'react'
 import { LinearGradient } from 'expo'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
 
-const Login = ({
+const Register = ({
     screenProps: {
         login,
         register,
@@ -13,13 +13,27 @@ const Login = ({
 }) => (
     <LinearGradient style={styles.container} colors={['#C45FFF', '#8819FF']} start={[1.0, 1.0]} end={[0.1, 0.1]}>
 
-        <Text style={styles.title}>Foodify</Text>
-
-        <Text style={styles.login}>Login</Text>
+        <Text style={styles.title}>Register</Text>
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('loginEmail', text)}
+            onChangeText={text => changeState('registerFirstName', text)}
+            placeholder="First Name"
+            placeholderTextColor="lightgray"
+            underlineColorAndroid='transparent'
+        />
+
+        <TextInput
+            style={styles.input}
+            onChangeText={text => changeState('registerLastName', text)}
+            placeholder="Last Name"
+            placeholderTextColor="lightgray"
+            underlineColorAndroid='transparent'
+        />
+
+        <TextInput
+            style={styles.input}
+            onChangeText={text => changeState('registerEmail', text)}
             placeholder="Email"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
@@ -27,21 +41,29 @@ const Login = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('loginPassword', text)}
+            onChangeText={text => changeState('registerPassword', text)}
             placeholder="Password"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
         />
 
-        <TouchableWithoutFeedback onPress={ login }>
+        <TextInput
+            style={styles.input}
+            onChangeText={text => changeState('registerPassword2', text)}
+            placeholder="Confirm password"
+            placeholderTextColor="lightgray"
+            underlineColorAndroid='transparent'
+        />
+
+        <TouchableWithoutFeedback>
             <View style={styles.button}>
-                <Text style={styles.buttonText}>Login Now</Text>
+                <Text style={styles.buttonText}>Register now</Text>
             </View>
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Register')}>
-            <View style={[styles.button, { marginTop: 150 }]}>
-                <Text style={styles.buttonText}>Register</Text>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
+            <View style={[styles.button, { marginTop: 70 }]}>
+                <Text style={styles.buttonText}>Login</Text>
             </View>
         </TouchableWithoutFeedback>
 
@@ -56,6 +78,7 @@ const styles = StyleSheet.create({
         fontSize: 48,
         fontFamily: 'montserratMedium',
         marginTop: 50,
+        marginBottom: 30,
         color: '#fff',
         textAlign: 'center',
     },
@@ -90,4 +113,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login
+export default Register
