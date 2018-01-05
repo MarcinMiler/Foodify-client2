@@ -7,7 +7,8 @@ const Login = ({
         login,
         register,
         state,
-        changeState
+        changeState,
+        addProduct
     },
     navigation
 }) => (

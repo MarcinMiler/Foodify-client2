@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, ScrollView, View } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, AsyncStorage } from 'react-native'
 import { Font } from 'expo'
 
 import { ApolloProvider } from 'react-apollo'
@@ -20,14 +20,6 @@ class App extends Component {
   }
 
   setToken = token => this.setState({ token })
-
-  async componentWillMount() {
-    try {
-      const t = await AsyncStorage.getItem('token')
-      console.log(t, 't')
-      if(t) this.setState({ token: t })
-    } catch(err) {}
-  }
 
   async componentDidMount() {
     await Font.loadAsync({

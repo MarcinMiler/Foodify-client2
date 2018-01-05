@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { AsyncStorage } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -35,6 +36,7 @@ class LoginContainer extends Component {
     handleChangeState = (key, value) => this.setState({ [key]: value })
 
     login = async () => {
+
         const { loginEmail, loginPassword } = this.state
         const valid = this.validateLogin(loginEmail, loginPassword)
 
@@ -43,14 +45,10 @@ class LoginContainer extends Component {
                 variables: {
                     email: loginEmail,
                     password: loginPassword
-                },
+                }
             })
-            console.log(loginResponse, 'login')
-            const { ok, token, error } = loginResponse.data.login
-            if(ok) {
-                await AsyncStorage.setItem('token', token)
-                this.props.setToken(token)
-            } else this.setState({ messageLoginError: { error: true, messages: [error.message] } })
+            if(loginResponse.data.login.ok) this.props.setToken(loginResponse.data.login.token)
+            else this.setState({ messageLoginError: { error: true, message: [loginResponse.data.login.error.message]} })
         }
     }
 
@@ -67,8 +65,7 @@ class LoginContainer extends Component {
                     password: registerPassword
                 },
             })
-            if(registerResponse.data.register.ok) this.handleChangeState('loginActive', true)
-            else this.setState({ messageRegisterError: { error: true, message: [registerResponse.data.register.error.message]} })
+            if(!registerResponse.data.register.ok) this.setState({ messageRegisterError: { error: true, message: [registerResponse.data.register.error.message]} })
         }
     }
 
@@ -117,7 +114,6 @@ class LoginContainer extends Component {
     }
 
     render() {
-        console.log(this.state)
         return(
             <LoginNavigator screenProps={{ login: this.login, register: this.register, state: this.state, changeState: this.handleChangeState }} />
         )
@@ -125,15 +121,15 @@ class LoginContainer extends Component {
 }
 
 const loginMutation = gql`
-    mutation login($email: String! $password: String!) {
-        login(email: $email password: $password) {
-            ok,
-            token,
-            error {
-                messsage
-            }
-        }
-    }
+  mutation login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+          ok,
+          token,
+          error {
+              message
+          }
+      }
+  }
 `
 const registerMutation = gql`
     mutation register($firstName: String! $lastName: String! $email: String!, $password: String!) {

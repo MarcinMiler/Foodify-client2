@@ -55,7 +55,7 @@ const Register = ({
             underlineColorAndroid='transparent'
         />
 
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={ register }>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>Register now</Text>
             </View>
