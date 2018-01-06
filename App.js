@@ -21,6 +21,11 @@ class App extends Component {
 
   setToken = token => this.setState({ token })
 
+  async componentWillMount() {
+    const token = await AsyncStorage.getItem('token')
+    this.setToken(token)
+  }
+
   async componentDidMount() {
     await Font.loadAsync({
       'icomoon': require('./resources/fonts/icomoon.ttf'),

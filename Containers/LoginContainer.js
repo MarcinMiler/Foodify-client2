@@ -47,7 +47,11 @@ class LoginContainer extends Component {
                     password: loginPassword
                 }
             })
-            if(loginResponse.data.login.ok) this.props.setToken(loginResponse.data.login.token)
+            if(loginResponse.data.login.ok) {
+                const { token } = loginResponse.data.login
+                this.props.setToken(token)
+                await AsyncStorage.setItem('token', token)
+            }
             else this.setState({ messageLoginError: { error: true, message: [loginResponse.data.login.error.message]} })
         }
     }
