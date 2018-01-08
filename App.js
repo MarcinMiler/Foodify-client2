@@ -5,6 +5,9 @@ import { Font } from 'expo'
 import { ApolloProvider } from 'react-apollo'
 import { client } from './apollo'
 
+import { Provider } from 'react-redux'
+import { store } from './store'
+
 import { createIconSetFromIcoMoon } from '@expo/vector-icons'
 import icoMoonConfig from './selection.json'
 export const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
@@ -32,7 +35,7 @@ class App extends Component {
       'montserratMedium': require('./resources/fonts/montserratMedium.ttf'),
       'montserratRegular': require('./resources/fonts/montserratRegular.ttf'),
     })
-    this.setState({fontLoaded: true})
+    this.setState({ fontLoaded: true })
   }
 
   render() {
@@ -40,7 +43,9 @@ class App extends Component {
     console.log(this.state)
     return(
       <ApolloProvider client={client}>
-        { this.state.token ? <AppNav /> : <LoginContainer setToken={this.setToken} /> }
+        <Provider store={store}>
+          { this.state.token ? <AppNav /> : <LoginContainer setToken={this.setToken} /> }
+        </Provider>
       </ApolloProvider>
     )
   }
