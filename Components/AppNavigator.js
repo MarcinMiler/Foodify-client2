@@ -7,7 +7,7 @@ import icoMoonConfig from '../selection.json'
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
 
 import TypeFood from './TypeFood'
-import Products from './Products'
+import ProductsContainer from '../Containers/ProductsContainer'
 import Cart from './Cart'
 import User from './User'
 
@@ -25,7 +25,7 @@ const ProductNavigator = StackNavigator({
     }
   },
   Products: {
-    screen: Products,
+    screen: ProductsContainer,
     navigationOptions: {
       headerStyle: {
         marginTop: 24,

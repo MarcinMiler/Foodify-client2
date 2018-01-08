@@ -9,32 +9,32 @@ import { LinearGradient } from 'expo'
 const TypeFood = ({
     navigation
 }) => {
-    const handleTouch = () => navigation.navigate('Products')
+    const handleTouch = category => navigation.navigate('Products', { category })
     return(
         <ScrollView contentContainerStyle={styles.contentContainer}>
     
-            <TouchableWithoutFeedback onPress={ handleTouch }>
+            <TouchableWithoutFeedback onPress={() => handleTouch('Salads') }>
                 <LinearGradient elevation={15} colors={['#5FFCFF', '#43FF9E']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={[ styles.items, { marginTop: 0 } ]}>
                     <Text style={ styles.text }>Salads</Text>
                     <Icon style={ styles.icon } name='salad' size={72} color='white' />
                 </LinearGradient>
             </TouchableWithoutFeedback>
     
-            <TouchableWithoutFeedback onPress={ handleTouch }>
+            <TouchableWithoutFeedback onPress={() => handleTouch('Dessert') }>
                 <LinearGradient elevation={15} colors={['#DA53FF', '#7328FF']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
                     <Text style={ styles.text }>Dessert</Text>
                     <Icon style={ styles.icon } name='pancake' size={72} color='white' />
                 </LinearGradient>
             </TouchableWithoutFeedback>
     
-            <TouchableWithoutFeedback onPress={ handleTouch }>
+            <TouchableWithoutFeedback onPress={() => handleTouch('Meat') }>
                 <LinearGradient elevation={15} colors={['#FF7676', '#FFE175']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
                     <Text style={ styles.text }>Meat</Text>
                     <Icon style={ styles.icon } name='meat' size={72} color='white' />
                 </LinearGradient>
             </TouchableWithoutFeedback>
             
-            <TouchableWithoutFeedback onPress={ handleTouch }>
+            <TouchableWithoutFeedback onPress={() => handleTouch('Sea food') }>
                 <LinearGradient elevation={15} colors={['#643DFF', '#75EDFF']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
                     <Text style={ styles.text }>Seafood</Text>
                     <Icon style={ styles.icon } name='octopus' size={72} color='white' />

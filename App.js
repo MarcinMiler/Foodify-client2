@@ -37,6 +37,7 @@ class App extends Component {
 
   render() {
     if(!this.state.fontLoaded) return null
+    console.log(this.state)
     return(
       <ApolloProvider client={client}>
         { this.state.token ? <AppNav /> : <LoginContainer setToken={this.setToken} /> }
