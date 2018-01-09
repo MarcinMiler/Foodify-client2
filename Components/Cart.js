@@ -4,113 +4,41 @@ import { View, Text, StyleSheet, ScrollView, Image } from 'react-native'
 import { Icon } from '../App'
 
 const Cart = ({
+    products,
+    deleteFromCart,
+    updateQuantity
+}) => {
+    const listOfProducts = products.map((product, i) => {
+        return(
+            <View key={i} style={[styles.orderContainer, { marginTop: 0}]}>
 
-}) => (
+                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
+
+                <View style={{marginLeft: 20}}>
+                    <Text style={styles.orderTitle}>{product.name}</Text>
+                    <Text style={styles.orderDescription}>Price: {product.price}$</Text>
+
+                    <View style={{flex:1, flexDirection: 'row'}}>
+                        <Text style={styles.orderDescription}>Quantity: {product.quantity}</Text>
+                        <View style={styles.iconBorder}>
+                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
+                        </View>
+
+                        <View style={styles.iconBorder}>
+                            <Icon style={ styles.icon } name='plus' size={10} color='black' />
+                        </View>
+                    </View>
+                </View>
+            </View>
+        )
+    })
+    return(
         <ScrollView contentContainerStyle={styles.contentContainer}>
-            <View style={[styles.orderContainer, { marginTop: 0}]}>
-
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-
-                <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>Chicken Salad</Text>
-                    <Text style={styles.orderDescription}>Price: 5$</Text>
-
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                        <Text style={styles.orderDescription}>Quantity: 1</Text>
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                        </View>
-
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='plus' size={10} color='black' />
-                        </View>
-                    </View>
-                </View>
-            </View>
-
-            <View style={styles.orderContainer}>
-
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-
-                <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>Chicken Salad</Text>
-                    <Text style={styles.orderDescription}>Price: 5$</Text>
-
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                        <Text style={styles.orderDescription}>Quantity: 1</Text>
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                        </View>
-
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='plus' size={10} color='black' />
-                        </View>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.orderContainer}>
-
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-
-                <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>Chicken Salad</Text>
-                    <Text style={styles.orderDescription}>Price: 5$</Text>
-
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                        <Text style={styles.orderDescription}>Quantity: 1</Text>
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                        </View>
-
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='plus' size={10} color='black' />
-                        </View>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.orderContainer}>
-
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-
-                <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>Chicken Salad</Text>
-                    <Text style={styles.orderDescription}>Price: 5$</Text>
-
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                        <Text style={styles.orderDescription}>Quantity: 1</Text>
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                        </View>
-
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='plus' size={10} color='black' />
-                        </View>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.orderContainer}>
-
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-
-                <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>Chicken Salad</Text>
-                    <Text style={styles.orderDescription}>Price: 5$</Text>
-
-                    <View style={{flex:1, flexDirection: 'row'}}>
-                        <Text style={styles.orderDescription}>Quantity: 1</Text>
-                        <View style={styles.iconBorder}>
-                            <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                        </View>
-
-                        <View style={styles.iconBorder}>
-                            <Icon name='plus' size={10} color='black' />
-                        </View>
-                    </View>
-                </View>
-            </View>
+            
+            { listOfProducts }
             
         </ScrollView>
-)
+)}
 
 const styles = StyleSheet.create({
     contentContainer: {

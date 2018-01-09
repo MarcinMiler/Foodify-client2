@@ -8,7 +8,7 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
 
 import TypeFood from './TypeFood'
 import ProductsContainer from '../Containers/ProductsContainer'
-import Cart from './Cart'
+import CartContainer from '../Containers/CartContainer'
 import User from './User'
 
 const ProductNavigator = StackNavigator({
@@ -41,7 +41,7 @@ const ProductNavigator = StackNavigator({
 
 const CartNavigator = StackNavigator({
   Type: {
-    screen: Cart,
+    screen: CartContainer,
     navigationOptions: {
       headerStyle: {
         marginTop: 24,

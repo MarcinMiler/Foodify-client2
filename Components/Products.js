@@ -5,7 +5,8 @@ import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
 const Products = ({
-    products
+    products,
+    addToCart
 }) => {
     const listOfProducts = products.map((product, i) => {
         return(
@@ -20,10 +21,11 @@ const Products = ({
                         <Text style={styles.buttonText}>More info</Text>
                     </View>
 
+                    <TouchableWithoutFeedback onPress={() => addToCart(product.id, product.name, product.price) } >
                     <View style={styles.iconWrap}>
                         <Icon name='addcart' size={15} color='white' />
                     </View>
-                    
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         </LinearGradient>
