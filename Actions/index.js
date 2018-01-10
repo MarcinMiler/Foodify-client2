@@ -4,9 +4,9 @@ export const addToCart = (id, name, price) => ({
     id, name, price
 })
 
-export const deleteFromCart = (id, price, quantity) => ({
+export const deleteFromCart = id => ({
     type: 'DELETE_FROM_CART',
-    id, price, quantity
+    id
 })
 
 export const updateQuantity = (id, payload) => ({

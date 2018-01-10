@@ -42,6 +42,8 @@ const Products = ({
 const styles = StyleSheet.create({
     contentContainer: {
         padding: 20,
+        backgroundColor: 'white',
+        minHeight: '100%'
     },
     product: {
         borderRadius: 15,

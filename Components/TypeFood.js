@@ -48,7 +48,8 @@ const TypeFood = ({
 const styles = StyleSheet.create({
     contentContainer: {
         padding: 20,
-        paddingTop: 40
+        paddingTop: 40,
+        backgroundColor: 'white',
     },
     items: {
         marginTop: 40,

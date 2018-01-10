@@ -14,8 +14,8 @@ const removeProduct = (id, products) => products.filter(p => p.id !== id)
 
 const updateQuantity = (products, id, payload) => {
     return products.map(p => {
-        if(p.id !== id) p
-        return Object.assign({}, p, { quantity: quantity + payload })
+        if(p.id === id) return Object.assign({}, p, { quantity: p.quantity + payload })
+        return p
     })
 }
 
