@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback, Button } from 'react-native'
 
 import { Icon } from '../App'
 
@@ -7,21 +7,24 @@ const Cart = ({
     products,
     totalPrice,
     deleteFromCart,
-    updateQuantity
+    updateQuantity,
+    navigation
 }) => {
     const listOfProducts = products.map((product, i) => {
         return(
-            <View key={i} style={[styles.orderContainer, { marginTop: 0}]}>
-
-                <TouchableWithoutFeedback onPress={() => deleteFromCart(product.id)}>
-                    <Image source={require('../Images/salad2.jpg')} style={styles.image} />
-                </TouchableWithoutFeedback>
+            <View key={i} style={(i === 0 ? [styles.orderContainer, { marginTop: 0 }] : styles.orderContainer )}>
+ 
+                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
 
                 <View style={{marginLeft: 20}}>
-                    <Text style={styles.orderTitle}>{product.name}</Text>
+                <View style={styles.wrap}>
+                        <Text style={styles.orderTitle}>{product.name}</Text>
+                        <Icon onPress={() => deleteFromCart(product.id)} style={styles.iconClose} name='plus' size={15} />
+                    </View>
+
                     <Text style={styles.orderDescription}>Price: {product.price}$</Text>
 
-                    <View style={{flex:1, flexDirection: 'row'}}>
+                    <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.orderDescription}>Quantity: {product.quantity}</Text>
 
                         <TouchableWithoutFeedback onPress={() => updateQuantity(product.id, -1)}>
@@ -45,20 +48,21 @@ const Cart = ({
         <ScrollView contentContainerStyle={styles.contentContainer}>
             
             { listOfProducts }
-            <Text>{totalPrice}</Text>
+            <View style={styles.hr}></View>
+            <Text style={styles.totalPrice}>Total Price: {totalPrice}$</Text>
+
+            <Button style={styles.button} title='Order' color='#3ccc2c' onPress={() => navigation.navigate('ConfirmOrder')} />
         </ScrollView>
 )}
 
 const styles = StyleSheet.create({
     contentContainer: {
         padding: 20,
-        backgroundColor: 'white',
-        minHeight: '100%'
     },
     orderContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        alignContent: 'flex-start',
         marginTop: 23
     },
     image: {
@@ -84,7 +88,28 @@ const styles = StyleSheet.create({
         padding: 4,
         marginTop: 15,
         marginLeft: 15
-    }
+    },
+    wrap: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    iconClose: {
+        transform: [{ rotate: '45deg' }],
+        marginTop: 6,
+    },
+    hr: {
+        width: '100%',
+        height: 2,
+        marginTop: 20,
+        backgroundColor: 'black'
+    },
+    totalPrice: {
+        marginTop: 10,
+        textAlign: 'right',
+        fontSize: 18,
+        fontFamily: 'montserratMedium',
+        marginBottom: 20,
+    },
 })
 
 export default Cart

@@ -9,6 +9,7 @@ const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
 import TypeFood from './TypeFood'
 import ProductsContainer from '../Containers/ProductsContainer'
 import CartContainer from '../Containers/CartContainer'
+import ConfirmOrderContainer from '../Containers/ConfirmOrderContainer'
 import User from './User'
 
 const ProductNavigator = StackNavigator({
@@ -40,7 +41,7 @@ const ProductNavigator = StackNavigator({
 })
 
 const CartNavigator = StackNavigator({
-  Type: {
+  Cart: {
     screen: CartContainer,
     navigationOptions: {
       headerStyle: {
@@ -51,11 +52,23 @@ const CartNavigator = StackNavigator({
       },
       title: 'Cart'
     },
+  },
+  ConfirmOrder: {
+    screen: ConfirmOrderContainer,
+    navigationOptions: {
+      headerStyle: {
+        marginTop: 24,
+      },
+      headerTitleStyle: {
+        alignSelf: 'center',
+      },
+      title: 'Confirm Order'
+    },
   }
 })
 
 const UserNavigator = StackNavigator({
-  Type: {
+  User: {
     screen: User,
     navigationOptions: {
       headerStyle: {
