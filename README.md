@@ -18,4 +18,4 @@ Foodify is an app where we can order food.
 ![cart](./docs/cart.jpeg)
 ![confirmOrder](./docs/confirmOrder.jpeg)
 ![confirmOrder2](./docs/confirmOrder2.jpeg)
-![trackOrder](./docs/trackOrder.jpeg)
+![trackorder](./docs/trackorder.jpeg)

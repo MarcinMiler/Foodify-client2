@@ -1,76 +1,98 @@
 import React from 'react'
-import { ScrollView, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-
-import { createIconSetFromIcoMoon } from '@expo/vector-icons'
-import icoMoonConfig from '../selection.json'
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
+import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, Image } from 'react-native'
 import { LinearGradient } from 'expo'
+
+import { Icon } from '../App'
+import Nav from './Nav'
 
 const TypeFood = ({
     navigation
 }) => {
-    const handleTouch = category => navigation.navigate('Products', { category })
+    const handleTouch = category => navigation.navigate('Product', { category })
     return(
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-    
-            <TouchableWithoutFeedback onPress={() => handleTouch('Salads') }>
-                <LinearGradient elevation={15} colors={['#5FFCFF', '#43FF9E']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={[ styles.items, { marginTop: 0 } ]}>
-                    <Text style={ styles.text }>Salads</Text>
-                    <Icon style={ styles.icon } name='salad' size={72} color='white' />
-                </LinearGradient>
-            </TouchableWithoutFeedback>
-    
-            <TouchableWithoutFeedback onPress={() => handleTouch('Dessert') }>
-                <LinearGradient elevation={15} colors={['#DA53FF', '#7328FF']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
-                    <Text style={ styles.text }>Dessert</Text>
-                    <Icon style={ styles.icon } name='pancake' size={72} color='white' />
-                </LinearGradient>
-            </TouchableWithoutFeedback>
-    
-            <TouchableWithoutFeedback onPress={() => handleTouch('Meat') }>
-                <LinearGradient elevation={15} colors={['#FF7676', '#FFE175']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
-                    <Text style={ styles.text }>Meat</Text>
-                    <Icon style={ styles.icon } name='meat' size={72} color='white' />
-                </LinearGradient>
-            </TouchableWithoutFeedback>
-            
-            <TouchableWithoutFeedback onPress={() => handleTouch('Sea food') }>
-                <LinearGradient elevation={15} colors={['#643DFF', '#75EDFF']} start={[0.1, 1.0]} end={[1.0, 0.1]} style={ styles.items }>
-                    <Text style={ styles.text }>Seafood</Text>
-                    <Icon style={ styles.icon } name='octopus' size={72} color='white' />
-                </LinearGradient>
-            </TouchableWithoutFeedback>
-            
-        </ScrollView>
+        <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
+
+            <Nav navigation={navigation} />
+
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+                
+                <TouchableNativeFeedback onPress={() => handleTouch('Salads')} delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='salad' size={75} color='white'/>
+                        <Text style={styles.text}>Appetizer</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+                <TouchableNativeFeedback delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='meat' size={75} color='white'/>
+                        <Text style={styles.text}>Dinner</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+                <TouchableNativeFeedback delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='fish' size={75} color='white'/>
+                        <Text style={styles.text}>Fish</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+                <TouchableNativeFeedback delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='prawn' size={75} color='white'/>
+                        <Text style={styles.text}>Sea food</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+                <TouchableNativeFeedback delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='sushi' size={75} color='white'/>
+                        <Text style={styles.text}>Sushi</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+                <TouchableNativeFeedback delayPressIn={0}>
+                    <View style={styles.product}>
+                        <Icon name='pancake' size={75} color='white'/>
+                        <Text style={styles.text}>Dessert</Text>
+                    </View>
+                </TouchableNativeFeedback>
+
+            </ScrollView>
+
+        </LinearGradient>
     )
 } 
 
 const styles = StyleSheet.create({
-    contentContainer: {
-        padding: 20,
-        paddingTop: 40,
-        backgroundColor: 'white',
+    container: {
+        height: '100%'
     },
-    items: {
-        marginTop: 40,
-        width: '100%',
-        height: 135,
-        borderRadius: 24,
-        alignItems: 'center',
-        justifyContent: 'space-between',
+    contentContainer: {
+        paddingTop: 10,
+        backgroundColor: 'transparent',
         flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    product: {
+        width: '40%',
+        height: 170,
+        backgroundColor: 'rgba(255,255,255,0.25)',
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: 'rgba(255,255,255,0.35)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: '5%',
+        marginRight: '5%',
+        marginBottom: 30
     },
     text: {
         fontFamily: 'montserratRegular',
-        color: 'white',
-        fontSize: 42,
-        marginLeft: 30,
-    },
-    icon: {
-        marginRight: 30
-    },
-    touch: {
-        backgroundColor: 'transparent'
+        fontSize: 20,
+        color: '#fff',
+        textAlign: 'center',
+        marginTop: 5
     }
 })
 

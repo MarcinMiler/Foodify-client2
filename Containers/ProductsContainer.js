@@ -15,7 +15,7 @@ class ProductsContainer extends Component {
         const { products } = this.props.data
         return(
             <View>
-                { products && <Products products={products} addToCart={this.props.addToCart} /> }
+                { products && <Products products={products} addToCart={this.props.addToCart} navigation={this.props.navigation} /> }
             </View>
         )
     }
