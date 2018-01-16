@@ -5,12 +5,17 @@ Foodify is an app where we can order food.
 ## Technology stack
 
 * [React-native](https://facebook.github.io/react-native/)
+* [React-navigation](https://reactnavigation.org/)
 * [Apollo](https://www.apollographql.com/)
 * [Redux](https://redux.js.org/)
 
 ## Prototype design
 
-![Foodify1](./docs/foodify1.jpeg)
-![Foodify2](./docs/foodify2.jpeg)
-![Foodify3](./docs/foodify3.jpeg)
-![Foodify4](./docs/foodify4.jpeg)
+![start](./docs/start.jpeg)
+![menu](./docs/menu.jpeg)
+![products](./docs/products.jpeg)
+![quantity](./docs/quantity.jpeg)
+![cart](./docs/cart.jpeg)
+![confirmOrder](./docs/confirmOrder.jpeg)
+![confirmOrder2](./docs/confirmOrder2.jpeg)
+![trackOrder](./docs/trackOrder.jpeg)
