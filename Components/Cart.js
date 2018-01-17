@@ -14,7 +14,7 @@ const Cart = ({
         return(
             <View key={i} style={(i === 0 ? [styles.orderContainer, { marginTop: 0 }] : styles.orderContainer )}>
  
-                <Image source={require('../Images/salad2.jpg')} style={styles.image} />
+                
 
                 <View style={{marginLeft: 20}}>
                 <View style={styles.wrap}>

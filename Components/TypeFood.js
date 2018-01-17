@@ -19,11 +19,11 @@ const TypeFood = ({
                 <TouchableNativeFeedback onPress={() => handleTouch('Salads')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='salad' size={75} color='white'/>
-                        <Text style={styles.text}>Appetizer</Text>
+                        <Text style={styles.text}>Salads</Text>
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Meat')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='meat' size={75} color='white'/>
                         <Text style={styles.text}>Dinner</Text>
@@ -51,7 +51,7 @@ const TypeFood = ({
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Dessert')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='pancake' size={75} color='white'/>
                         <Text style={styles.text}>Dessert</Text>

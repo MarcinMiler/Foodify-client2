@@ -4,7 +4,9 @@ import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback } from 'rea
 import { Icon } from '../App'
 
 const Nav = ({
-    navigation
+    navigation,
+    backIcon,
+    downIcon
 }) => (
     <View style={styles.nav}>
         
@@ -14,8 +16,20 @@ const Nav = ({
             <Icon onPress={() => navigation.navigate('Cart')} name='cart' size={28} color='white' />
         </View>
 
-        <View>
+        <View style={styles.wrap2}>
+
+            { backIcon
+                ? <Icon onPress={() => navigation.navigate('TypeFood')} style={styles.iconArrow} name='downArrow' size={25} color='white' />
+                : <Icon name='downArrow' size={25} color='transparent' />
+            }
+
             <Text style={styles.text}>Choose Type of Food</Text>
+
+            { downIcon
+                ? <Icon name='search' size={25} color='white' />
+                : <Icon name='search' size={25} color='transparent' />
+            }
+
         </View>
 
     </View>
@@ -37,12 +51,21 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 28
     },
+    wrap2: {
+        marginTop: 25,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     text: {
         fontFamily: 'montserratRegular',
         fontSize: 20,
         color: '#fff',
-        textAlign: 'center',
-        marginTop: 25
+        textAlign: 'center'
+    },
+    iconArrow: {
+        width: 25,
+        transform: [{ rotate: '90deg'}]
     }
 })
 

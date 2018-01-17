@@ -10,13 +10,34 @@ const Products = ({
     addToCart,
     navigation
 }) => {
-    
+    const listOfProducts = products.map((product, i) => {
+        return(
+            <View key={i} style={styles.product}>
+
+                <View style={styles.wrapImage}>
+                    <Image style={styles.image} source={require('../Images/s2.png')} />
+                </View>
+
+                <Text style={styles.name}>{product.name}</Text>
+
+                <View style={styles.stars}>
+                    <Icon style={styles.star} name='star' size={15} color='white' />
+                    <Icon style={styles.star} name='star' size={15} color='white' />
+                    <Icon style={styles.star} name='star' size={15} color='white' />
+                </View>
+
+                <Text style={styles.price}>Add {product.price} $</Text>
+            </View>
+        )
+    })
     return(
         <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
             
-            <Nav navigation={navigation} />
+            <Nav navigation={navigation} backIcon={true} downIcon={true} />
 
-            
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+                { listOfProducts }
+            </ScrollView>
 
         </LinearGradient>
 )}
@@ -25,6 +46,52 @@ const styles = StyleSheet.create({
     container: {
         height: '100%'
     },
+    contentContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingTop: 10,
+    },
+    product: {
+        width: '40%',
+        height: 200,
+        marginBottom: 30,
+        marginLeft: '5%',
+        marginRight: '5%',
+        backgroundColor: 'rgba(255,255,255,0.25)',
+        borderWidth: 1,
+        borderRadius: 3,
+        borderColor: 'rgba(255,255,255,0.25)',
+        justifyContent: 'center'
+    },
+    wrapImage: {
+        justifyContent: 'center'
+    },
+    image: {
+        width: 130,
+        height: 100,
+        resizeMode: 'contain',
+        marginLeft: 7
+    },
+    name: {
+        fontFamily: 'montserratRegular',
+        fontSize: 20,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    stars: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10
+    },
+    star: {
+        marginLeft: 4
+    },
+    price: {
+        fontFamily: 'montserratRegular',
+        fontSize: 18,
+        color: '#fff',
+        textAlign: 'center',
+    }
 })
 
 export default Products
