@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
-
+import { NavigationActions } from 'react-navigation'
 import { Icon } from '../App'
 
 const Nav = ({
     navigation,
     backIcon,
-    downIcon
+    downIcon,
+    title
 }) => (
     <View style={styles.nav}>
         
@@ -19,11 +20,11 @@ const Nav = ({
         <View style={styles.wrap2}>
 
             { backIcon
-                ? <Icon onPress={() => navigation.navigate('TypeFood')} style={styles.iconArrow} name='downArrow' size={25} color='white' />
+                ? <Icon onPress={() => navigation.dispatch(NavigationActions.back())} style={styles.iconArrow} name='downArrow' size={25} color='white' />
                 : <Icon name='downArrow' size={25} color='transparent' />
             }
 
-            <Text style={styles.text}>Choose Type of Food</Text>
+            <Text style={styles.text}>{title}</Text>
 
             { downIcon
                 ? <Icon name='search' size={25} color='white' />

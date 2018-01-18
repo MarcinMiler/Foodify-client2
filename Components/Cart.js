@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback, Button } from 'react-native'
-
+import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback, Button, TouchableNativeFeedback } from 'react-native'
+import { LinearGradient } from 'expo'
 import { Icon } from '../App'
+
+import Nav from './Nav'
 
 const Cart = ({
     products,
@@ -10,106 +12,145 @@ const Cart = ({
     updateQuantity,
     navigation
 }) => {
-    const listOfProducts = products.map((product, i) => {
+    console.log(products)
+    const listOfProducts = products.map(product => {
         return(
-            <View key={i} style={(i === 0 ? [styles.orderContainer, { marginTop: 0 }] : styles.orderContainer )}>
- 
+            <View key={product.id} style={styles.product}>
+                
+                
+                <Image style={styles.image} source={require('../Images/s2.png')} />
                 
 
-                <View style={{marginLeft: 20}}>
-                <View style={styles.wrap}>
-                        <Text style={styles.orderTitle}>{product.name}</Text>
-                        <Icon onPress={() => deleteFromCart(product.id)} style={styles.iconClose} name='plus' size={15} />
+                <View style={styles.description}>
+
+                    <View style={styles.wrapName}>
+                        <Text style={styles.name}>{product.name}</Text>
+                        <Icon name='close' size={25} color='white' />
                     </View>
 
-                    <Text style={styles.orderDescription}>Price: {product.price}$</Text>
+                    <Text style={styles.price}>Price: {product.price} $</Text>
 
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={styles.orderDescription}>Quantity: {product.quantity}</Text>
-
-                        <TouchableWithoutFeedback onPress={() => updateQuantity(product.id, -1)}>
-                            <View style={styles.iconBorder}>
-                                <Icon style={ styles.icon } name='minus' size={10} color='black' />
-                            </View>
-                        </TouchableWithoutFeedback>
-
-                        <TouchableWithoutFeedback onPress={() => updateQuantity(product.id, 1)}>
-                            <View style={styles.iconBorder}>
-                                <Icon style={ styles.icon } name='plus' size={10} color='black' />
-                            </View>
-                        </TouchableWithoutFeedback>
-
+                    <View style={styles.quantity}>
+                        <Text style={styles.quantityText}>Quantity:</Text>
+                        <View style={styles.wrapIcons}>
+                            <Icon name='minus' size={25} color='white' />
+                            <Text style={styles.quantityText}>{product.quantity}</Text>
+                            <Icon name='plus' size={25} color='white' />
+                        </View>
                     </View>
+
                 </View>
+                
+
             </View>
         )
     })
     return(
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-            
-            { listOfProducts }
-            <View style={styles.hr}></View>
-            <Text style={styles.totalPrice}>Total Price: {totalPrice}$</Text>
+        <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
-            <Button style={styles.button} title='Order' color='#3ccc2c' onPress={() => navigation.navigate('ConfirmOrder')} />
-        </ScrollView>
+            <Nav navigation={navigation} backIcon={true} title='Cart' />
+
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+
+                { listOfProducts }
+
+            </ScrollView>
+
+            <View style={styles.footer}>
+                <Text style={styles.totalPrice}>Total Price: {totalPrice} $</Text>
+                <TouchableNativeFeedback>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Order</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+
+        </LinearGradient>
 )}
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%'
+    },
     contentContainer: {
-        padding: 20,
+        paddingTop: 20,
     },
-    orderContainer: {
-        flex: 1,
+    product: {
         flexDirection: 'row',
-        alignContent: 'flex-start',
-        marginTop: 23
-    },
-    image: {
-        width: 100,
-        height: 100,
-        borderRadius: 15,
-    },
-    orderTitle: {
-        fontSize: 24,
-        fontFamily: 'montserratMedium',
-    },
-    orderDescription: {
-        fontSize: 18,
-        fontFamily: 'montserratRegular',
-        marginTop: 15
-    },
-    iconBorder: {
-        borderRadius: 4,
+        width: '90%',
+        marginLeft: '5%',
+        marginRight: '5%',
+        backgroundColor: 'rgba(255,255,255,0.25)',
         borderWidth: 1,
-        borderColor: 'black',
-        width: 20,
-        height: 20,
-        padding: 4,
-        marginTop: 15,
-        marginLeft: 15
+        borderRadius: 4,
+        borderColor: 'rgba(255,255,255,0.25)',
+        marginBottom: 20
     },
     wrap: {
+        
+    },
+    image: {
+        width: 130,
+        height: 100,
+        resizeMode: 'contain',
+        marginLeft: 7
+    },
+    description: {
+        justifyContent: 'space-around',
+        marginLeft: 10
+    },
+    wrapName: {
+        width: '62%',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    iconClose: {
-        transform: [{ rotate: '45deg' }],
-        marginTop: 6,
+    name: {
+        fontFamily: 'montserratRegular',
+        color: '#fff',
+        fontSize: 20,
     },
-    hr: {
-        width: '100%',
-        height: 2,
-        marginTop: 20,
-        backgroundColor: 'black'
+    price: {
+        fontFamily: 'montserratRegular',
+        color: '#fff',
+        fontSize: 20,
+    },
+    quantity: {
+        flexDirection: 'row'
+    },
+    quantityText: {
+        fontFamily: 'montserratRegular',
+        color: '#fff',
+        fontSize: 20,
+    },
+    wrapIcons: {
+        width: 100,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    footer: {
+        paddingTop: 0,
+        padding: 20
     },
     totalPrice: {
-        marginTop: 10,
-        textAlign: 'right',
-        fontSize: 18,
-        fontFamily: 'montserratMedium',
-        marginBottom: 20,
+        padding: 20,
+        fontFamily: 'montserratRegular',
+        color: '#fff',
+        fontSize: 20,
+        textAlign: 'center'
     },
+    button: {
+        padding: 10,
+        backgroundColor: 'rgba(255,255,255,0.35)',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.35)',
+        borderRadius: 3
+    },
+    buttonText: {
+        fontFamily: 'montserratRegular',
+        color: '#fff',
+        fontSize: 20,
+        textAlign: 'center'
+    }
 })
 
 export default Cart

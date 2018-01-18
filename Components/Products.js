@@ -10,30 +10,32 @@ const Products = ({
     addToCart,
     navigation
 }) => {
-    const listOfProducts = products.map((product, i) => {
+    const listOfProducts = products.map(product => {
         return(
-            <View key={i} style={styles.product}>
+            <TouchableWithoutFeedback key={product.id} onPress={() => navigation.navigate('Quantity', { product })}>
+                <View style={styles.product}>
 
-                <View style={styles.wrapImage}>
-                    <Image style={styles.image} source={require('../Images/s2.png')} />
+                    <View style={styles.wrapImage}>
+                        <Image style={styles.image} source={require('../Images/s2.png')} />
+                    </View>
+
+                    <Text style={styles.name}>{product.name}</Text>
+
+                    <View style={styles.stars}>
+                        <Icon style={styles.star} name='star' size={15} color='white' />
+                        <Icon style={styles.star} name='star' size={15} color='white' />
+                        <Icon style={styles.star} name='star' size={15} color='white' />
+                    </View>
+
+                    <Text style={styles.price}>Add {product.price} $</Text>
                 </View>
-
-                <Text style={styles.name}>{product.name}</Text>
-
-                <View style={styles.stars}>
-                    <Icon style={styles.star} name='star' size={15} color='white' />
-                    <Icon style={styles.star} name='star' size={15} color='white' />
-                    <Icon style={styles.star} name='star' size={15} color='white' />
-                </View>
-
-                <Text style={styles.price}>Add {product.price} $</Text>
-            </View>
+            </TouchableWithoutFeedback>
         )
     })
     return(
         <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
             
-            <Nav navigation={navigation} backIcon={true} downIcon={true} />
+            <Nav navigation={navigation} backIcon={true} downIcon={true} title='Choose Products' />
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 { listOfProducts }

@@ -12,7 +12,7 @@ const TypeFood = ({
     return(
         <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
-            <Nav navigation={navigation} />
+            <Nav navigation={navigation} title='Choose Type of Food' />
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 
