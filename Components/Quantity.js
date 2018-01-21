@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, Slider } from 'react-native'
 import { LinearGradient } from 'expo'
+import { NavigationActions } from 'react-navigation'
 
 import Nav from './Nav'
 
@@ -18,7 +19,10 @@ const Quantity = ({
             <Slider onValueChange={val => changeState('quantity', val)} minimumValue={1} maximumValue={20} step={1} />
             <Text style={styles.text}>{quantity}</Text>
 
-            <TouchableNativeFeedback onPress={ addToCart }>
+            <TouchableNativeFeedback onPress={() => {
+                addToCart()
+                navigation.dispatch(NavigationActions.back())
+            }}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>Add to cart</Text>
                 </View>

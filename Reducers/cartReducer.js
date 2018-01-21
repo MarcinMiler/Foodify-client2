@@ -1,31 +1,6 @@
 
 const initialState = {
-    products: [
-        {
-            id: 1,
-            name: 'Prawn Salad',
-            price: 10,
-            quantity: 2
-        },
-        {
-            id: 2,
-            name: 'Prawn Salad',
-            price: 8,
-            quantity: 1
-        },
-        {
-            id: 3,
-            name: 'Prawn Salad',
-            price: 10,
-            quantity: 2
-        },
-        {
-            id: 4,
-            name: 'Prawn Salad',
-            price: 10,
-            quantity: 2
-        },
-    ],
+    products: [],
 }
 
 const newProduct = action => ({

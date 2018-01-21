@@ -13,6 +13,9 @@ import QuantityContainer from '../Containers/QuantityContainer'
 
 import Drawer from './Drawer'
 
+import ConfirmOrderContainer from '../Containers/ConfirmOrderContainer'
+import ConfirmOrderContainer2 from '../Containers/ConfirmOrderContainer2'
+
 const ProductNavigator = StackNavigator({
   Type: {
     screen: TypeFood,
@@ -27,12 +30,26 @@ const ProductNavigator = StackNavigator({
   headerMode: 'none'
 })
 
+const CartNavigator = StackNavigator({
+  Cart2: {
+    screen: CartContainer
+  },
+  ConfirmOrder: {
+    screen: ConfirmOrderContainer
+  },
+  ConfirmOrder2: {
+    screen: ConfirmOrderContainer2
+  }
+},{
+  headerMode: 'none'
+})
+
 const AppNavigator = DrawerNavigator({
   TypeFood: {
     screen: ProductNavigator
   },
   Cart: {
-    screen: CartContainer,
+    screen: CartNavigator,
   },
 },
   {

@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
+import { connect } from 'react-redux'
+import { selectProductsCount } from '../Reducers'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from '../App'
 
@@ -7,14 +9,27 @@ const Nav = ({
     navigation,
     backIcon,
     downIcon,
-    title
+    title,
+    productsCount
 }) => (
     <View style={styles.nav}>
         
         <View style={styles.wrap}>
             <Icon onPress={() => navigation.navigate('DrawerOpen')} name='menu' size={28} color='white' />
             <Text style={styles.title}>Foodify</Text>
-            <Icon onPress={() => navigation.navigate('Cart')} name='cart' size={28} color='white' />
+
+            <View>
+                <Icon onPress={() => navigation.navigate('Cart')} name='cart' size={28} color='white' />
+                
+                { productsCount !== 0
+                    ?   <View style={styles.cartDot}>
+                            <Text style={styles.cardDotText}>{productsCount}</Text>
+                        </View>
+                    :   <View></View>
+                }
+
+            </View>
+            
         </View>
 
         <View style={styles.wrap2}>
@@ -67,7 +82,26 @@ const styles = StyleSheet.create({
     iconArrow: {
         width: 25,
         transform: [{ rotate: '90deg'}]
+    },
+    cartDot: {
+        position: 'absolute',
+        width: 17,
+        height: 17,
+        borderRadius: 15,
+        backgroundColor: 'red',
+        left: 15,
+        top: -5
+    },
+    cardDotText: {
+        fontFamily: 'montserratRegular',
+        fontSize: 14,
+        color: '#fff',
+        textAlign: 'center'
     }
 })
 
-export default Nav
+const mapStateToProps = state => ({
+    productsCount: selectProductsCount(state)
+})
+
+export default connect(mapStateToProps, null)(Nav)

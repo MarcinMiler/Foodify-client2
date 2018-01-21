@@ -12,20 +12,19 @@ const Cart = ({
     updateQuantity,
     navigation
 }) => {
-    console.log(products)
     const listOfProducts = products.map(product => {
         return(
             <View key={product.id} style={styles.product}>
                 
-                
-                <Image style={styles.image} source={require('../Images/s2.png')} />
-                
+                <View style={styles.wrapImage}>
+                    <Image style={styles.image} source={require('../Images/s2.png')} />
+                </View>
 
                 <View style={styles.description}>
 
                     <View style={styles.wrapName}>
                         <Text style={styles.name}>{product.name}</Text>
-                        <Icon name='close' size={25} color='white' />
+                        <Icon onPress={() => deleteFromCart(product.id)} name='close' size={25} color='white' />
                     </View>
 
                     <Text style={styles.price}>Price: {product.price} $</Text>
@@ -33,9 +32,9 @@ const Cart = ({
                     <View style={styles.quantity}>
                         <Text style={styles.quantityText}>Quantity:</Text>
                         <View style={styles.wrapIcons}>
-                            <Icon name='minus' size={25} color='white' />
+                            <Icon onPress={() => updateQuantity(product.id, -1)} name='minus' size={25} color='white' />
                             <Text style={styles.quantityText}>{product.quantity}</Text>
-                            <Icon name='plus' size={25} color='white' />
+                            <Icon onPress={() => updateQuantity(product.id, 1)} name='plus' size={25} color='white' />
                         </View>
                     </View>
 
@@ -58,7 +57,7 @@ const Cart = ({
 
             <View style={styles.footer}>
                 <Text style={styles.totalPrice}>Total Price: {totalPrice} $</Text>
-                <TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={() => navigation.navigate('ConfirmOrder')}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Order</Text>
                     </View>
@@ -86,21 +85,22 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(255,255,255,0.25)',
         marginBottom: 20
     },
-    wrap: {
-        
+    wrapImage: {
+        width: '40%',
+        justifyContent: 'center'
     },
     image: {
-        width: 130,
+        width: '90%',
         height: 100,
         resizeMode: 'contain',
-        marginLeft: 7
+        marginLeft: 8
     },
     description: {
+        width: '55%',
         justifyContent: 'space-around',
         marginLeft: 10
     },
     wrapName: {
-        width: '62%',
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

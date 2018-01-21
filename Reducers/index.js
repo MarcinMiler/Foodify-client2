@@ -13,4 +13,9 @@ export const selectTotalPrice = createSelector(
     (products) => products.reduce((prev, cur) => (cur.price * cur.quantity) + prev, 0)
 )
 
+export const selectProductsCount = createSelector(
+    selectProducts,
+    (products) => products.length
+)
+
 export default rootReducer
