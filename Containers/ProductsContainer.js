@@ -11,7 +11,6 @@ import Products from '../Components/Products'
 
 class ProductsContainer extends Component {
     render() {
-        console.log(this.props, 'pro')
         const { products } = this.props.data
         return(
             <View>

@@ -9,7 +9,14 @@ const ConfirmOrder = ({
     totalPrice,
     navigation
 }) => {
-
+    const listOfProducts = products.map(product => {
+        return(
+            <View key={product.id} style={styles.product}>
+                <View style={styles.dot}></View>
+                <Text style={styles.productPrice}>{product.name} (x{product.quantity})</Text>
+            </View>
+        )
+    })
     return(
         <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
@@ -19,7 +26,7 @@ const ConfirmOrder = ({
                 <View>
                     <Text style={styles.title}>Your Order:</Text>
 
-
+                    { listOfProducts }
                 </View>
 
                 <View>
@@ -29,7 +36,7 @@ const ConfirmOrder = ({
                         <Text style={styles.price}>{totalPrice} $</Text>
                     </View>
 
-                    <TouchableNativeFeedback onPress={() => navigation.navigate('ConfirmOrder2')}>
+                    <TouchableNativeFeedback onPress={() => navigation.navigate('Address')}>
                         <View style={styles.button}>
                             <Text style={styles.buttonText}>Next step</Text>
                         </View>
@@ -53,7 +60,25 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'montserratRegular',
         color: '#fff',
+        fontSize: 24,
+        marginBottom: 10
+    },
+    product: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    dot: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: 'white'
+    },
+    productPrice: {
+        fontFamily: 'montserratRegular',
+        color: '#fff',
         fontSize: 20,
+        marginLeft: 10,
     },
     toPay: {
         marginLeft: 'auto',

@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo'
 
 import Nav from './Nav'
 
-const ConfirmOrder2 = ({
+const Address = ({
     navigation,
     changeState,
     newOrder
@@ -17,12 +17,12 @@ const ConfirmOrder2 = ({
 
             <View>
 
-                <Text style={styles.title}>Your adress:</Text>
+                <Text style={styles.title}>Your address:</Text>
 
                 <TextInput
                     style={styles.input}
-                    onChangeText={text => changeState('place', text)}
-                    placeholder="Place"
+                    onChangeText={text => changeState('address', text)}
+                    placeholder="Address"
                     placeholderTextColor="lightgray"
                     underlineColorAndroid='transparent'
                 />
@@ -45,9 +45,9 @@ const ConfirmOrder2 = ({
             </View>
 
             <View style={styles.wrap}>
-                <TouchableNativeFeedback onPress={newOrder}>
+                <TouchableNativeFeedback onPress={newOrder} onPress={() => navigation.navigate('Orders')}>
                     <View style={styles.button}>
-                        <Text style={styles.buttonText}>Next step</Text>
+                        <Text style={styles.buttonText}>Confirm Order</Text>
                     </View>
                 </TouchableNativeFeedback>
             </View>
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ConfirmOrder2
+export default Address

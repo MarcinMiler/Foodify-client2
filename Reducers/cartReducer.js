@@ -31,6 +31,9 @@ const cart = (state = initialState, action) => {
         case 'UPDATE_QUANTITY':
             return { products: updateQuantity(state.products, action.id, action.payload) }
 
+        case 'CLEAR_CART':
+            return { products: [] }
+
         default:
             return state
     }

@@ -40,17 +40,10 @@ const Drawer = ({
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback onPress={() => navigation.navigate('')} delayPressIn={0}>
-                    <View style={styles.bodyItem}>
-                        <Icon name='timer' size={25} color='white' />
-                        <Text style={styles.bodyText}>Track Order</Text>
-                    </View>
-                </TouchableNativeFeedback>
-
-                <TouchableNativeFeedback onPress={() => navigation.navigate('')} delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => navigation.navigate('Orders')} delayPressIn={0}>
                     <View style={styles.bodyItem}>
                         <Icon name='calendar' size={25} color='white' />
-                        <Text style={styles.bodyText}>History order</Text>
+                        <Text style={styles.bodyText}>Your Orders</Text>
                     </View>
                 </TouchableNativeFeedback>
 
