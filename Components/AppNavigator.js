@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
+import { setToken } from '../Actions'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 
 import { createIconSetFromIcoMoon } from '@expo/vector-icons'
@@ -15,6 +17,8 @@ import Drawer from './Drawer'
 
 import ConfirmOrderContainer from '../Containers/ConfirmOrderContainer'
 import AddressContainer from '../Containers/AddressContainer'
+import LoginContainer from '../Containers/LoginContainer'
+import RegisterContainer from '../Containers/RegisterContainer'
 
 const ProductNavigator = StackNavigator({
   Type: {
@@ -44,6 +48,17 @@ const CartNavigator = StackNavigator({
   headerMode: 'none'
 })
 
+const LoginNavigator = StackNavigator({
+  Loginn: {
+    screen: LoginContainer
+  },
+  Register: {
+    screen: RegisterContainer
+  }
+},{
+  headerMode: 'none'
+})
+
 const AppNavigator = DrawerNavigator({
   TypeFood: {
     screen: ProductNavigator
@@ -53,7 +68,7 @@ const AppNavigator = DrawerNavigator({
   },
   Orders: {
     screen: HistoryOrderContainer
-  }
+  },
 },
   {
     contentComponent: Drawer,
@@ -62,12 +77,26 @@ const AppNavigator = DrawerNavigator({
     drawerToggleRoute: 'DrawerToggle',
 })
   
-export default class AppNav extends Component {
+class AppNav extends Component {
+
+  async componentWillMount() {
+    let token = await AsyncStorage.getItem('token')
+    if(token) this.props.setToken(token)
+  }
+
   render() {
     return(
       <View style={{ flex: 1 }}>
-        <AppNavigator />
+        { this.props.token ? <AppNavigator /> : <LoginNavigator /> }
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  token: state.auth.token
+})
+
+const mapDispatchToProps = { setToken }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppNav)

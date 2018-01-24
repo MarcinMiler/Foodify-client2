@@ -1,75 +1,43 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { setToken } from '../Actions'
 import { AsyncStorage } from 'react-native'
-import { TabNavigator, StackNavigator } from 'react-navigation'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import Login from '../Components/Login'
 import Register from '../Components/Register'
 
-const LoginNavigator = StackNavigator({
-    Login: {
-        screen: Login
-    },
-    Register: {
-        screen: Register
-    },
-},{
-    headerMode: 'none',
-})
-
 class LoginContainer extends Component {
 
     state = {
-        loginEmail: '',
-        loginPassword: '',
-        registerFirstName: '',
-        registerLastName: '',
-        registerEmail: '',
-        registerPassword: '',
-        registerPassword2: '',
-        messageLoginError: {},
-        messageRegisterError: {},
-        messageRegisterSucces: false
+        email: '',
+        password: '',
+        error: {},
     }
 
     handleChangeState = (key, value) => this.setState({ [key]: value })
 
     login = async () => {
-
-        const { loginEmail, loginPassword } = this.state
-        const valid = this.validateLogin(loginEmail, loginPassword)
+        console.log('login')
+        const { email, password } = this.state
+        const valid = this.validateLogin(email, password)
 
         if(valid.ok) {
             const loginResponse = await this.props.login({
                 variables: {
-                    email: loginEmail,
-                    password: loginPassword
+                    email,
+                    password
                 }
             })
+            console.log(loginResponse, 'resslogin')
             if(loginResponse.data.login.ok) {
                 const { token } = loginResponse.data.login
+                console.log('lol')
                 this.props.setToken(token)
                 await AsyncStorage.setItem('token', token)
             }
-            else this.setState({ messageLoginError: { error: true, message: [loginResponse.data.login.error.message]} })
-        }
-    }
-
-    register = async () => {
-        const { registerFirstName, registerLastName, registerEmail, registerPassword, registerPassword2 } = this.state
-        const valid = this.validateRegister(registerFirstName, registerLastName, registerEmail, registerPassword, registerPassword2)
-
-        if(valid.ok) {
-            const registerResponse = await this.props.register({
-                variables: {
-                    firstName: registerFirstName,
-                    lastName: registerLastName,
-                    email: registerEmail,
-                    password: registerPassword
-                },
-            })
-            if(!registerResponse.data.register.ok) this.setState({ messageRegisterError: { error: true, message: [registerResponse.data.register.error.message]} })
+            else this.setState({ error: { error: true, message: [loginResponse.data.login.error.message]} })
         }
     }
 
@@ -88,39 +56,14 @@ class LoginContainer extends Component {
         if(!password) messages = [...messages, 'Password is empty']
 
         if(messages.length > 0) {
-            this.setState({ messageLoginError: { error: true, messages } })
-            return { ok: false, messages }
-        }
-        else return { ok: true }
-    }
-
-    validateRegister = (firstName, lastName, email, password, password2) => {
-        let messages = []
-
-        if(!firstName) messages = [...messages, 'First Name is empty']
-        if(!lastName) messages = [...messages, 'Last Name is empty']
-        if(!email) messages = [...messages, 'Email is empty']
-        else {
-            let re = /\S+@\S+\.\S+/
-            let emailTest = re.test(email)
-            if(!emailTest) messages = [...messages, 'Email is incorrect']
-        }
-
-        if(!password) messages = [...messages, 'Password is empty']
-        if(!password2) messages = [...messages, 'Second Password is empty']
-        if(password !== password2) messages = [...messages, 'Passwords are not the same']
-
-        if(messages.length > 0) {
-            this.setState({ messageRegisterError: { error: true, messages } })
+            this.setState({ error: { error: true, messages } })
             return { ok: false, messages }
         }
         else return { ok: true }
     }
 
     render() {
-        return(
-            <LoginNavigator screenProps={{ login: this.login, register: this.register, state: this.state, changeState: this.handleChangeState }} />
-        )
+        return <Login login={this.login} changeState={this.handleChangeState} navigation={this.props.navigation} />
     }
 }
 
@@ -135,18 +78,10 @@ const loginMutation = gql`
       }
   }
 `
-const registerMutation = gql`
-    mutation register($firstName: String! $lastName: String! $email: String!, $password: String!) {
-        register(firstName: $firstName lastName: $lastName email: $email, password: $password) {
-            ok,
-            error {
-                message
-            }
-        }
-    }
-`
+
+const mapDispatchToProps = { setToken }
 
 export default compose(
-    graphql(loginMutation, { name: 'login' }),
-    graphql(registerMutation, { name: 'register' }),
+    graphql(loginMutation, { name: 'login' } ),
+    connect(null, mapDispatchToProps)
 )(LoginContainer)

@@ -3,12 +3,8 @@ import { LinearGradient } from 'expo'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
 
 const Register = ({
-    screenProps: {
-        login,
-        register,
-        state,
-        changeState
-    },
+    register,
+    changeState,
     navigation
 }) => (
     <LinearGradient style={styles.container} colors={['#C45FFF', '#8819FF']} start={[1.0, 1.0]} end={[0.1, 0.1]}>
@@ -17,23 +13,7 @@ const Register = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('registerFirstName', text)}
-            placeholder="First Name"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
-
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('registerLastName', text)}
-            placeholder="Last Name"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
-
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('registerEmail', text)}
+            onChangeText={text => changeState('email', text)}
             placeholder="Email"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
@@ -41,7 +21,7 @@ const Register = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('registerPassword', text)}
+            onChangeText={text => changeState('password', text)}
             placeholder="Password"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
@@ -49,13 +29,13 @@ const Register = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('registerPassword2', text)}
+            onChangeText={text => changeState('password2', text)}
             placeholder="Confirm password"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
         />
 
-        <TouchableWithoutFeedback onPress={ register }>
+        <TouchableWithoutFeedback onPress={() => register() }>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>Register now</Text>
             </View>

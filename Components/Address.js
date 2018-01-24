@@ -22,7 +22,7 @@ const Address = ({
                 <TextInput
                     style={styles.input}
                     onChangeText={text => changeState('address', text)}
-                    placeholder="Address"
+                    placeholder="Postal code"
                     placeholderTextColor="lightgray"
                     underlineColorAndroid='transparent'
                 />
@@ -45,7 +45,10 @@ const Address = ({
             </View>
 
             <View style={styles.wrap}>
-                <TouchableNativeFeedback onPress={newOrder} onPress={() => navigation.navigate('Orders')}>
+                <TouchableNativeFeedback onPress={() => {
+                    newOrder()
+                    navigation.navigate('Orders')
+                }}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Confirm Order</Text>
                     </View>

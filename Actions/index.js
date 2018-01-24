@@ -17,3 +17,8 @@ export const updateQuantity = (id, payload) => ({
 export const clearCart = () => ({
     type: 'CLEAR_CART'
 })
+
+export const setToken = token => ({
+    type: 'SET_TOKEN',
+    token
+})

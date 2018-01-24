@@ -1,15 +1,10 @@
 import React from 'react'
 import { LinearGradient } from 'expo'
-import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableNativeFeedback } from 'react-native'
 
 const Login = ({
-    screenProps: {
-        login,
-        register,
-        state,
-        changeState,
-        addProduct
-    },
+    login,
+    changeState,
     navigation
 }) => (
     <LinearGradient style={styles.container} colors={['#C45FFF', '#8819FF']} start={[1.0, 1.0]} end={[0.1, 0.1]}>
@@ -20,7 +15,7 @@ const Login = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('loginEmail', text)}
+            onChangeText={text => changeState('email', text)}
             placeholder="Email"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
@@ -28,23 +23,23 @@ const Login = ({
 
         <TextInput
             style={styles.input}
-            onChangeText={text => changeState('loginPassword', text)}
+            onChangeText={text => changeState('password', text)}
             placeholder="Password"
             placeholderTextColor="lightgray"
             underlineColorAndroid='transparent'
         />
 
-        <TouchableWithoutFeedback onPress={ login }>
+        <TouchableNativeFeedback onPress={ login }>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>Login Now</Text>
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableNativeFeedback>
 
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Register')}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Register')}>
             <View style={[styles.button, { marginTop: 150 }]}>
                 <Text style={styles.buttonText}>Register</Text>
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableNativeFeedback>
 
     </LinearGradient>
 )

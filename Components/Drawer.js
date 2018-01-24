@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
+import { connect } from 'react-redux'
+import { setToken } from '../Actions'
+import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
 import { NavigationActions } from 'react-navigation'
 
 import { Icon } from '../App'
 
 const Drawer = ({
-    navigation
+    navigation,
+    setToken
 }) => {
 
     const navigateToScreen = route => {
@@ -65,7 +68,10 @@ const Drawer = ({
 
             <View style={styles.footer}>
 
-                <TouchableNativeFeedback style={styles.footerTouch}>
+                <TouchableNativeFeedback onPress={async () => {
+                    setToken('')
+                    await AsyncStorage.removeItem('token')
+                }}>
                     <View style={styles.footerButton}>
                         <Text style={styles.footerText}>Logout</Text>
                     </View>
@@ -125,4 +131,6 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Drawer
+const mapDispatchToProps = { setToken }
+
+export default connect(null, mapDispatchToProps)(Drawer)

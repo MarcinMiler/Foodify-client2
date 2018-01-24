@@ -34,9 +34,38 @@ class AddressContainer extends Component {
                     postalCode,
                     phoneNumber,
                     totalPrice: this.props.totalPrice
+                },
+                update: (store, { data: { newOrder } }) => {
+                    const query = gql`
+                        {
+                            me {
+                                orders {
+                                    id
+                                    clientID
+                                    date
+                                    products {
+                                        productID
+                                        quantity
+                                    }
+                                    totalPrice
+                                    orderStatus
+                                    address
+                                    postalCode
+                                    phoneNumber
+                                }
+                            }
+                        }
+                    `
+                    let data = store.readQuery({
+                        query
+                    })
+                    data.me.orders.push(newOrder)
+                    store.writeQuery({
+                        query,
+                        data
+                    })
                 }
             })
-
             if(response) this.props.clearCart()
         }
     }
@@ -65,6 +94,17 @@ const newOrderMutation = gql`
     mutation newOrder($products: [ProcutsInput] $address: String! $postalCode: String! $phoneNumber: String! $totalPrice: Int!) {
         newOrder(products: $products, address: $address, postalCode: $postalCode, phoneNumber: $phoneNumber totalPrice: $totalPrice) {
             id
+            clientID
+            date
+            products {
+              productID
+              quantity
+            }
+            totalPrice
+            orderStatus
+            address
+            postalCode
+            phoneNumber
         }
     }
 `

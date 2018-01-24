@@ -22,9 +22,18 @@ const orderQuery = gql`
         me {
             email,
             orders {
-                id,
-                date,
+                id
+                clientID
+                date
+                products{
+                  productID
+                  quantity
+                }
+                totalPrice
                 orderStatus
+                address
+                postalCode
+                phoneNumber
             }
         }
     }

@@ -13,20 +13,11 @@ import icoMoonConfig from './selection.json'
 export const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
 
 import AppNav from './Components/AppNavigator'
-import LoginContainer from './Containers/LoginContainer'
 
 class App extends Component {
 
   state = {
     fontLoaded: false,
-    token: ''
-  }
-
-  setToken = token => this.setState({ token })
-
-  async componentWillMount() {
-    const token = await AsyncStorage.getItem('token')
-    this.setToken(token)
   }
 
   async componentDidMount() {
@@ -40,11 +31,10 @@ class App extends Component {
 
   render() {
     if(!this.state.fontLoaded) return null
-    console.log(this.state)
     return(
       <ApolloProvider client={client}>
         <Provider store={store}>
-          { this.state.token ? <AppNav /> : <LoginContainer setToken={this.setToken} /> }
+          <AppNav />
         </Provider>
       </ApolloProvider>
     )

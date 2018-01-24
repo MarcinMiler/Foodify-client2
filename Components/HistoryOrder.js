@@ -10,7 +10,7 @@ const HistoryOrder = ({
     orders
 }) => {
     let count = orders.length + 1
-    const listOfOrders = orders.map(order => {
+    const listOfOrders = orders.slice().reverse().map(order => {
         count--
         return(
             <TouchableNativeFeedback key={order.id} delayPressIn={0}>
