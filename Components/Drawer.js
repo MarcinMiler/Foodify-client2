@@ -12,13 +12,6 @@ const Drawer = ({
     setToken
 }) => {
 
-    const navigateToScreen = route => {
-        const navigateAction = NavigationActions.navigate({
-            routeName: route
-        })
-        navigation.dispatch(navigateAction)
-    }
-
     return(
         <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
@@ -47,20 +40,6 @@ const Drawer = ({
                     <View style={styles.bodyItem}>
                         <Icon name='calendar' size={25} color='white' />
                         <Text style={styles.bodyText}>Your Orders</Text>
-                    </View>
-                </TouchableNativeFeedback>
-
-                <TouchableNativeFeedback onPress={() => navigation.navigate('')} delayPressIn={0}>
-                    <View style={styles.bodyItem}>
-                        <Icon name='user' size={25} color='white' />
-                        <Text style={styles.bodyText}>My Account</Text>
-                    </View>
-                </TouchableNativeFeedback>
-
-                <TouchableNativeFeedback onPress={() => navigation.navigate('')} delayPressIn={0}>
-                    <View style={styles.bodyItem}>
-                        <Icon name='gear' size={25} color='white' />
-                        <Text style={styles.bodyText}>Settings</Text>
                     </View>
                 </TouchableNativeFeedback>
 

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableNativeFeedback, Tex
 import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const HistoryOrder = ({
     navigation,

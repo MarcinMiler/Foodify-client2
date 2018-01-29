@@ -7,7 +7,7 @@ const Register = ({
     changeState,
     navigation
 }) => (
-    <LinearGradient style={styles.container} colors={['#C45FFF', '#8819FF']} start={[1.0, 1.0]} end={[0.1, 0.1]}>
+    <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
         <Text style={styles.title}>Register</Text>
 
@@ -35,14 +35,17 @@ const Register = ({
             underlineColorAndroid='transparent'
         />
 
-        <TouchableWithoutFeedback onPress={() => register() }>
+        <TouchableWithoutFeedback onPress={() => {
+            register()
+            navigation.navigate('Login')
+        }}>
             <View style={styles.button}>
                 <Text style={styles.buttonText}>Register now</Text>
             </View>
         </TouchableWithoutFeedback>
 
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-            <View style={[styles.button, { marginTop: 70 }]}>
+            <View style={[styles.button, { marginTop: 120 }]}>
                 <Text style={styles.buttonText}>Login</Text>
             </View>
         </TouchableWithoutFeedback>
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 48,
         fontFamily: 'montserratMedium',
         marginTop: 50,
-        marginBottom: 30,
+        marginBottom: 100,
         color: '#fff',
         textAlign: 'center',
     },
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
     input: {
         margin: 10,
         padding: 5,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: 'rgba(255,255,255,0.3)',
         fontFamily: 'montserratRegular',
         color: 'white',
         borderRadius: 3,
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'transparent',
         borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.2)',
+        borderColor: 'rgba(255,255,255,0.35)',
         padding: 15,
         margin: 10,
         borderRadius: 3,

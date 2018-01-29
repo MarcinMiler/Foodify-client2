@@ -7,7 +7,7 @@ const Login = ({
     changeState,
     navigation
 }) => (
-    <LinearGradient style={styles.container} colors={['#C45FFF', '#8819FF']} start={[1.0, 1.0]} end={[0.1, 0.1]}>
+    <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
         <Text style={styles.title}>Foodify</Text>
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     input: {
         margin: 10,
         padding: 5,
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: 'rgba(255,255,255,0.3)',
         fontFamily: 'montserratRegular',
         color: 'white',
         borderRadius: 3,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'transparent',
         borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.2)',
+        borderColor: 'rgba(255,255,255,0.35)',
         padding: 15,
         margin: 10,
         borderRadius: 3,

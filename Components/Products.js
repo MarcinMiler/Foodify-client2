@@ -3,14 +3,15 @@ import { ScrollView, View, Text, StyleSheet, Image, TouchableWithoutFeedback } f
 import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
-import Nav from '../Components/Nav'
+import Nav from '../Containers/NavContainer'
 
 const Products = ({
     products,
     addToCart,
-    navigation
+    navigation,
+    filter
 }) => {
-    const listOfProducts = products.map(product => {
+    const listOfProducts = products.filter(p => p.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0).map(product => {
         return(
             <TouchableWithoutFeedback key={product.id} onPress={() => navigation.navigate('Quantity', { product })}>
                 <View style={styles.product}>

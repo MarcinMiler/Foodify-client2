@@ -1,7 +1,5 @@
 import React from 'react'
-import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback } from 'react-native'
-import { connect } from 'react-redux'
-import { selectProductsCount } from '../Reducers'
+import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, TextInput } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { Icon } from '../App'
 
@@ -10,7 +8,10 @@ const Nav = ({
     backIcon,
     downIcon,
     title,
-    productsCount
+    search,
+    productsCount,
+    changeState,
+    changeFilter
 }) => (
     <View style={styles.nav}>
         
@@ -35,15 +36,24 @@ const Nav = ({
         <View style={styles.wrap2}>
 
             { backIcon
-                ? <Icon onPress={() => navigation.dispatch(NavigationActions.back())} style={styles.iconArrow} name='downArrow' size={25} color='white' />
-                : <Icon name='downArrow' size={25} color='transparent' />
+                ?   <Icon onPress={() => navigation.dispatch(NavigationActions.back())} style={styles.iconArrow} name='downArrow' size={25} color='white' />
+                :   <Icon name='downArrow' size={25} color='transparent' />
+            }
+            
+            { search
+                ?   <TextInput
+                        style={styles.input}
+                        onChangeText={text => changeFilter(text)}
+                        placeholder="Search"
+                        placeholderTextColor="lightgray"
+                        underlineColorAndroid='transparent'/>
+
+                :   <Text style={styles.text}>{title}</Text> 
             }
 
-            <Text style={styles.text}>{title}</Text>
-
             { downIcon
-                ? <Icon name='search' size={25} color='white' />
-                : <Icon name='search' size={25} color='transparent' />
+                ?   <Icon onPress={() => changeState()} name='search' size={25} color='white' />
+                :   <Icon name='search' size={25} color='transparent' />
             }
 
         </View>
@@ -83,6 +93,15 @@ const styles = StyleSheet.create({
         width: 25,
         transform: [{ rotate: '90deg'}]
     },
+    input: {
+        width: 200,
+        height: 25,
+        paddingLeft: 10,
+        backgroundColor: 'rgba(255,255,255,0.3)',
+        fontFamily: 'montserratRegular',
+        color: 'white',
+        borderRadius: 3,
+    },
     cartDot: {
         position: 'absolute',
         width: 17,
@@ -100,8 +119,4 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = state => ({
-    productsCount: selectProductsCount(state)
-})
-
-export default connect(mapStateToProps, null)(Nav)
+export default Nav

@@ -3,7 +3,7 @@ import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, Image } fr
 import { LinearGradient } from 'expo'
 
 import { Icon } from '../App'
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const TypeFood = ({
     navigation

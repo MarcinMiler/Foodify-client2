@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableNativeFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
 
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const ConfirmOrder = ({
     products,

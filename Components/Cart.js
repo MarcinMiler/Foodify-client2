@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback, Bu
 import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const Cart = ({
     products,
@@ -40,7 +40,6 @@ const Cart = ({
 
                 </View>
                 
-
             </View>
         )
     })
@@ -57,7 +56,9 @@ const Cart = ({
 
             <View style={styles.footer}>
                 <Text style={styles.totalPrice}>Total Price: {totalPrice} $</Text>
-                <TouchableNativeFeedback onPress={() => navigation.navigate('ConfirmOrder')}>
+                <TouchableNativeFeedback onPress={() => {
+                    if(products.length !== 0) navigation.navigate('ConfirmOrder')
+                }}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Order</Text>
                     </View>

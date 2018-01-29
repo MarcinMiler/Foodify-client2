@@ -3,7 +3,7 @@ import { View, ScrollView, Text, StyleSheet, TouchableNativeFeedback, Slider } f
 import { LinearGradient } from 'expo'
 import { NavigationActions } from 'react-navigation'
 
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const Quantity = ({
     addToCart,

@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import { setToken } from '../Actions'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 
-import { createIconSetFromIcoMoon } from '@expo/vector-icons'
-import icoMoonConfig from '../selection.json'
-const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'icomoon')
-
 import TypeFood from './TypeFood'
 import CartContainer from '../Containers/CartContainer'
 import ProductsContainer from '../Containers/ProductsContainer'
@@ -49,7 +45,7 @@ const CartNavigator = StackNavigator({
 })
 
 const LoginNavigator = StackNavigator({
-  Loginn: {
+  Login: {
     screen: LoginContainer
   },
   Register: {
@@ -94,7 +90,7 @@ class AppNav extends Component {
 }
 
 const mapStateToProps = state => ({
-  token: state.auth.token
+  token: state.app.token
 })
 
 const mapDispatchToProps = { setToken }

@@ -22,3 +22,8 @@ export const setToken = token => ({
     type: 'SET_TOKEN',
     token
 })
+
+export const changeSearchFilter = text => ({
+    type: 'CHANGE_SEARCH_FILTER',
+    text
+})

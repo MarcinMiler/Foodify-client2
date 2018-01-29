@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { createSelector } from 'reselect'
 import cart from './cartReducer'
-import auth from './authReducer'
+import app from './appReducer'
 
 const rootReducer = combineReducers({
     cart,
-    auth
+    app
 })
 
 export const selectProducts = state => state.cart.products
