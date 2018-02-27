@@ -29,7 +29,9 @@ class RegisterContainer extends Component {
             })
             console.log(registerResponse, 'ress')
             if(!registerResponse.data.register.ok) this.setState({ error: { error: true, message: [registerResponse.data.register.error.message]} })
+            return true
         }
+        return false
     }
 
     validateRegister = (email, password, password2) => {
@@ -55,7 +57,7 @@ class RegisterContainer extends Component {
 
     render() {
         console.log(this.state, 'state')
-        return <Register register={this.register} changeState={this.handleChangeState} navigation={this.props.navigation} />
+        return <Register register={this.register} changeState={this.handleChangeState} navigation={this.props.navigation} error={this.state.error.messages} />
     }
 }
 

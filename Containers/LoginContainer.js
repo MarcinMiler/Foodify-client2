@@ -37,7 +37,7 @@ class LoginContainer extends Component {
                 this.props.setToken(token)
                 await AsyncStorage.setItem('token', token)
             }
-            else this.setState({ error: { error: true, message: [loginResponse.data.login.error.message]} })
+            else this.setState({ error: { error: true, messages: [loginResponse.data.login.error.message]} })
         }
     }
 
@@ -63,7 +63,7 @@ class LoginContainer extends Component {
     }
 
     render() {
-        return <Login login={this.login} changeState={this.handleChangeState} navigation={this.props.navigation} />
+        return <Login login={this.login} changeState={this.handleChangeState} navigation={this.props.navigation} error={this.state.error.messages} />
     }
 }
 

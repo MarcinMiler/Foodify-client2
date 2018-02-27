@@ -22,7 +22,7 @@ const Address = ({
                 <TextInput
                     style={styles.input}
                     onChangeText={text => changeState('address', text)}
-                    placeholder="Postal code"
+                    placeholder="Address"
                     placeholderTextColor="lightgray"
                     underlineColorAndroid='transparent'
                 />

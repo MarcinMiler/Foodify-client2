@@ -5,47 +5,60 @@ import { View, Text, StyleSheet, TextInput, TouchableNativeFeedback } from 'reac
 const Login = ({
     login,
     changeState,
-    navigation
+    navigation,
+    error
 }) => (
     <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
-        <Text style={styles.title}>Foodify</Text>
+        <View style={styles.item}>
+            <Text style={styles.title}>Foodify</Text>
+        </View>
 
-        <Text style={styles.login}>Login</Text>
+        <View style={styles.item}>
+            <Text style={styles.login}>Login</Text>
 
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('email', text)}
-            placeholder="Email"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
+            { error ? <View style={{margin: 10}}>{ error.map((e, i) => <Text style={styles.errorText} key={i}>{e}</Text>)}</View> : <View></View>}
+            
+            <TextInput
+                style={styles.input}
+                onChangeText={text => changeState('email', text)}
+                placeholder="Email"
+                placeholderTextColor="lightgray"
+                underlineColorAndroid='transparent'
+            />
+            
+            <TextInput
+                style={styles.input}
+                onChangeText={text => changeState('password', text)}
+                placeholder="Password"
+                placeholderTextColor="lightgray"
+                underlineColorAndroid='transparent'
+            />
+            
+            <TouchableNativeFeedback onPress={ login }>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>Login Now</Text>
+                </View>
+            </TouchableNativeFeedback>
+        </View>
 
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('password', text)}
-            placeholder="Password"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
+        <View style={styles.item}>
+            <TouchableNativeFeedback onPress={() => navigation.navigate('Register')}>
+                <View style={[styles.button, { marginTop: 150 }]}>
+                    <Text style={styles.buttonText}>Register</Text>
+                </View>
+            </TouchableNativeFeedback>
+        </View>
 
-        <TouchableNativeFeedback onPress={ login }>
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>Login Now</Text>
-            </View>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback onPress={() => navigation.navigate('Register')}>
-            <View style={[styles.button, { marginTop: 150 }]}>
-                <Text style={styles.buttonText}>Register</Text>
-            </View>
-        </TouchableNativeFeedback>
 
     </LinearGradient>
 )
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+    item: {
         flex: 1,
     },
     title: {
@@ -59,8 +72,12 @@ const styles = StyleSheet.create({
         color: 'lightgray',
         fontSize: 24,
         textAlign: 'center',
-        marginTop: 100,
         fontFamily: 'montserratRegular',
+    },
+    errorText: {
+        fontSize: 12,
+        color: 'white',
+        fontFamily: 'montserratRegular'
     },
     input: {
         margin: 10,

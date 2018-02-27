@@ -5,56 +5,70 @@ import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'rea
 const Register = ({
     register,
     changeState,
-    navigation
-}) => (
+    navigation,
+    error
+}) => {
+    console.log(error, 'error')
+return(
     <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
-        <Text style={styles.title}>Register</Text>
+        <View style={styles.item}>
+            <Text style={styles.title}>Register</Text>
+        </View>
 
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('email', text)}
-            placeholder="Email"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
+        <View style={styles.item}>
+            { error ? <View style={{margin: 10}}>{ error.map((e, i) => <Text style={styles.errorText} key={i}>{e}</Text>)}</View> : <View></View>}
 
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('password', text)}
-            placeholder="Password"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
+            <TextInput
+                style={styles.input}
+                onChangeText={text => changeState('email', text)}
+                placeholder="Email"
+                placeholderTextColor="lightgray"
+                underlineColorAndroid='transparent'
+            />
+            
+            <TextInput
+                style={styles.input}
+                onChangeText={text => changeState('password', text)}
+                placeholder="Password"
+                placeholderTextColor="lightgray"
+                underlineColorAndroid='transparent'
+            />
+            
+            <TextInput
+                style={styles.input}
+                onChangeText={text => changeState('password2', text)}
+                placeholder="Confirm password"
+                placeholderTextColor="lightgray"
+                underlineColorAndroid='transparent'
+            />
+            
+            <TouchableWithoutFeedback onPress={async () => {
+                const reg = await register()
+                if(reg) navigation.navigate('Login')
+            }}>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>Register now</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        </View>
 
-        <TextInput
-            style={styles.input}
-            onChangeText={text => changeState('password2', text)}
-            placeholder="Confirm password"
-            placeholderTextColor="lightgray"
-            underlineColorAndroid='transparent'
-        />
-
-        <TouchableWithoutFeedback onPress={() => {
-            register()
-            navigation.navigate('Login')
-        }}>
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>Register now</Text>
-            </View>
-        </TouchableWithoutFeedback>
-
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-            <View style={[styles.button, { marginTop: 120 }]}>
-                <Text style={styles.buttonText}>Login</Text>
-            </View>
-        </TouchableWithoutFeedback>
+        <View style={styles.item}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
+                <View style={[styles.button, { marginTop: 120 }]}>
+                    <Text style={styles.buttonText}>Login</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        </View>
 
     </LinearGradient>
-)
+)}
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+    item: {
         flex: 1,
     },
     title: {
@@ -71,6 +85,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 100,
         fontFamily: 'montserratRegular',
+    },
+    errorText: {
+        fontSize: 12,
+        color: 'white',
+        fontFamily: 'montserratRegular'
     },
     input: {
         margin: 10,

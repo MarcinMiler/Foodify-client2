@@ -26,7 +26,8 @@ const productsQuery = gql`
             id,
             name,
             price,
-            category
+            category,
+            url
         }
     }
 `
