@@ -22,7 +22,7 @@ const Drawer = ({
 
             <View>
 
-                <TouchableNativeFeedback onPress={() => navigation.navigate('TypeFood')} delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => navigation.navigate('Type')} delayPressIn={0}>
                     <View style={styles.bodyItem}>
                         <Icon name='home' size={25} color='white' />
                         <Text style={styles.bodyText}>Home</Text>

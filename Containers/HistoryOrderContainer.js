@@ -6,37 +6,68 @@ import gql from 'graphql-tag'
 import HistoryOrder from '../Components/HistoryOrder'
 
 class HistoryOrderContainer extends Component {
+
+    componentDidMount() {
+        // this.props.myOrders.startPolling(10000)
+        this.subscribe()
+    }
+
+    subscribe = () => {
+        this.props.myOrders.subscribeToMore({
+            document: newStatusSubscription,
+            updateQuery: (prev, data) => {
+                console.log(prev, data, 'lol')
+            }
+        })
+    }
+
     render() {
         const { navigation } = this.props
-        const { me } = this.props.data
+        const { myOrders } = this.props.myOrders
+        console.log(this.props, 'truck')
         return(
             <View>
-                { me && <HistoryOrder navigation={navigation} orders={me.orders} /> }
+                { myOrders && <HistoryOrder navigation={navigation} orders={myOrders} /> }
             </View>
         )
     }
 }
 
 const orderQuery = gql`
-    query me {
-        me {
-            email,
-            orders {
-                id
-                clientID
-                date
-                products{
-                  productID
-                  quantity
-                }
-                totalPrice
-                orderStatus
-                address
-                postalCode
-                phoneNumber
+    query myOrders {
+        myOrders {
+            id
+            clientID
+            date
+            products {
+              productID
+              quantity
             }
+            totalPrice
+            orderStatus
+            address
+            postalCode
+            phoneNumber
+        }
+    }
+`
+const newStatusSubscription = gql`
+    subscription newStatus {
+        newStatus {
+            id
+            clientID
+            date
+            products {
+              productID
+              quantity
+            }
+            totalPrice
+            orderStatus
+            address
+            postalCode
+            phoneNumber
         }
     }
 `
 
-export default graphql(orderQuery)(HistoryOrderContainer)
+export default graphql(orderQuery, { name: 'myOrders' })(HistoryOrderContainer)

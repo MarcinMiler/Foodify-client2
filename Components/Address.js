@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, TouchableNativeFeedback, TextInput } from 'react-native'
 import { LinearGradient } from 'expo'
 
-import Nav from './Nav'
+import Nav from '../Containers/NavContainer'
 
 const Address = ({
     navigation,

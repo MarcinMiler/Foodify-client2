@@ -10,7 +10,33 @@ const HistoryOrder = ({
     orders
 }) => {
     let count = orders.length + 1
+
     const listOfOrders = orders.slice().reverse().map(order => {
+
+        let icon = ''
+        let text = ''
+        switch(order.orderStatus) {
+            case 'Order placed':
+                icon = 'check2'
+                text = 'You order was placed'
+                break
+            case 'Order confirmed':
+                icon = 'check3'
+                text = 'Your order has benn confirmed'
+                break
+            case 'Order preparing':
+                icon = 'check4'
+                text = 'Your order is preparing'
+                break
+            case 'Order in delivery':
+                icon = 'truck'
+                text = 'Your order is in delivery'
+                break
+            case 'Order complete':
+                icon = 'truck'
+                text = 'Order complete, Bon Apetit :)'
+                break                
+        }
         count--
         return(
             <TouchableNativeFeedback key={order.id} delayPressIn={0}>
@@ -22,10 +48,10 @@ const HistoryOrder = ({
                     </View>
 
                     <View style={styles.orderStatus}>
-                        <Icon name='check3' size={25} color='white' />
+                        <Icon name={icon} size={25} color='white' />
                         <View>
                             <Text style={styles.orderStatusText}>{order.orderStatus}</Text>
-                            <Text style={styles.orderStatusText2}>Your order has benn confirmed</Text>
+                            <Text style={styles.orderStatusText2}>{text}</Text>
                         </View>
                     </View>
                 </View>

@@ -20,7 +20,7 @@ const Nav = ({
             <Text style={styles.title}>Foodify</Text>
 
             <View>
-                <Icon onPress={() => navigation.navigate('Cart')} name='cart' size={28} color='white' />
+                <Icon onPress={() => navigation.navigate('Cart2')} name='cart' size={28} color='white' />
                 
                 { productsCount !== 0
                     ?   <View style={styles.cartDot}>

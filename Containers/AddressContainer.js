@@ -22,7 +22,7 @@ class AddressContainer extends Component {
 
         if(valid.ok) {
             const { address, postalCode, phoneNumber } = this.state 
-
+            console.log(address, 'address')
             const listOfProducts = this.props.cart.map(p => {
                 return { productID: p.id, quantity: p.quantity }
             })
@@ -38,28 +38,26 @@ class AddressContainer extends Component {
                 update: (store, { data: { newOrder } }) => {
                     const query = gql`
                         {
-                            me {
-                                orders {
-                                    id
-                                    clientID
-                                    date
-                                    products {
-                                        productID
-                                        quantity
-                                    }
-                                    totalPrice
-                                    orderStatus
-                                    address
-                                    postalCode
-                                    phoneNumber
+                            myOrders {
+                                id
+                                clientID
+                                date
+                                products {
+                                    productID
+                                    quantity
                                 }
+                                totalPrice
+                                orderStatus
+                                address
+                                postalCode
+                                phoneNumber
                             }
                         }
                     `
                     let data = store.readQuery({
                         query
                     })
-                    data.me.orders.push(newOrder)
+                    data.myOrders.push(newOrder)
                     store.writeQuery({
                         query,
                         data
@@ -86,6 +84,7 @@ class AddressContainer extends Component {
     }
 
     render() {
+        console.log(this.state)
         return <Address changeState={this.handleChangeState} newOrder={this.newOrder} navigation={this.props.navigation} />
     }
 }

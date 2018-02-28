@@ -16,7 +16,6 @@ class NavContainer extends Component {
     handleChangeFilter = text => this.props.changeSearchFilter(text)
 
     render() {
-        console.log(this.state)
         return <Nav changeFilter={this.handleChangeFilter} changeState={this.handleChangeState} search={this.state.search} {...this.props} />
     }
 }
