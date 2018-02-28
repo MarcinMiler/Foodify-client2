@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
 import Nav from '../Containers/NavContainer'
+import CacheImage from './CacheImage'
 
 const Products = ({
     products,
@@ -17,7 +18,7 @@ const Products = ({
                 <View style={styles.product}>
 
                     <View style={styles.wrapImage}>
-                        <Image style={styles.image} source={{uri: `http://192.168.8.101:4000/uploads/${product.url}`}} />
+                        <CacheImage style={styles.image} uri={`http://192.168.8.101:4000/uploads/${product.url}`} />
                     </View>
 
                     <Text style={styles.name}>{product.name}</Text>
