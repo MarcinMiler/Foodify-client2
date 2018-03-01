@@ -7,9 +7,7 @@ const Register = ({
     changeState,
     navigation,
     error
-}) => {
-    console.log(error, 'error')
-return(
+}) => (
     <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
         <View style={styles.item}>
@@ -62,7 +60,7 @@ return(
         </View>
 
     </LinearGradient>
-)}
+)
 
 const styles = StyleSheet.create({
     container: {

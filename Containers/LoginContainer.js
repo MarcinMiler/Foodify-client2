@@ -19,7 +19,6 @@ class LoginContainer extends Component {
     handleChangeState = (key, value) => this.setState({ [key]: value })
 
     login = async () => {
-        console.log('login')
         const { email, password } = this.state
         const valid = this.validateLogin(email, password)
 
@@ -30,10 +29,9 @@ class LoginContainer extends Component {
                     password
                 }
             })
-            console.log(loginResponse, 'resslogin')
+
             if(loginResponse.data.login.ok) {
                 const { token } = loginResponse.data.login
-                console.log('lol')
                 this.props.setToken(token)
                 await AsyncStorage.setItem('token', token)
             }

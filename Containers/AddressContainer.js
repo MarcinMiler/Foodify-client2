@@ -12,7 +12,7 @@ class AddressContainer extends Component {
         address: '',
         postalCode: '',
         phoneNumber: '',
-        formError: {}
+        error: {}
     }
 
     handleChangeState = (key, value) => this.setState({ [key]: value })
@@ -21,8 +21,8 @@ class AddressContainer extends Component {
         const valid = this.validate()
 
         if(valid.ok) {
-            const { address, postalCode, phoneNumber } = this.state 
-            console.log(address, 'address')
+            const { address, postalCode, phoneNumber } = this.state
+
             const listOfProducts = this.props.cart.map(p => {
                 return { productID: p.id, quantity: p.quantity }
             })
@@ -34,38 +34,12 @@ class AddressContainer extends Component {
                     postalCode,
                     phoneNumber,
                     totalPrice: this.props.totalPrice
-                },
-                update: (store, { data: { newOrder } }) => {
-                    const query = gql`
-                        {
-                            myOrders {
-                                id
-                                clientID
-                                date
-                                products {
-                                    productID
-                                    quantity
-                                }
-                                totalPrice
-                                orderStatus
-                                address
-                                postalCode
-                                phoneNumber
-                            }
-                        }
-                    `
-                    let data = store.readQuery({
-                        query
-                    })
-                    data.myOrders.push(newOrder)
-                    store.writeQuery({
-                        query,
-                        data
-                    })
                 }
             })
             if(response) this.props.clearCart()
+            return true
         }
+        return false
     }
 
     validate = () => {
@@ -77,15 +51,14 @@ class AddressContainer extends Component {
         if(!phoneNumber) messages = [...messages, 'Phone number is empty']
 
         if(messages.length > 0) {
-            this.setState({ formError: { error: true, messages } })
+            this.setState({ error: { error: true, messages } })
             return { ok: false, messages }
         }
         else return { ok: true }
     }
 
     render() {
-        console.log(this.state)
-        return <Address changeState={this.handleChangeState} newOrder={this.newOrder} navigation={this.props.navigation} />
+        return <Address changeState={this.handleChangeState} newOrder={this.newOrder} navigation={this.props.navigation} error={this.state.error.messages} />
     }
 }
 

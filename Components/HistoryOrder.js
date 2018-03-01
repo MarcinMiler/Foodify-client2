@@ -12,9 +12,9 @@ const HistoryOrder = ({
     let count = orders.length + 1
 
     const listOfOrders = orders.slice().reverse().map(order => {
-
         let icon = ''
         let text = ''
+        
         switch(order.orderStatus) {
             case 'Order placed':
                 icon = 'check2'
@@ -33,7 +33,7 @@ const HistoryOrder = ({
                 text = 'Your order is in delivery'
                 break
             case 'Order complete':
-                icon = 'truck'
+                icon = 'gift'
                 text = 'Order complete, Bon Apetit :)'
                 break                
         }

@@ -18,17 +18,16 @@ class RegisterContainer extends Component {
     register = async () => {
         const { email, password, password2 } = this.state
         const valid = this.validateRegister(email, password, password2)
-        console.log(valid, 'valid')
+
         if(valid.ok) {
-            console.log('pass')
             const registerResponse = await this.props.register({
                 variables: {
                     email,
                     password
                 },
             })
-            console.log(registerResponse, 'ress')
             if(!registerResponse.data.register.ok) this.setState({ error: { error: true, message: [registerResponse.data.register.error.message]} })
+            
             return true
         }
         return false
@@ -56,7 +55,6 @@ class RegisterContainer extends Component {
     }
 
     render() {
-        console.log(this.state, 'state')
         return <Register register={this.register} changeState={this.handleChangeState} navigation={this.props.navigation} error={this.state.error.messages} />
     }
 }

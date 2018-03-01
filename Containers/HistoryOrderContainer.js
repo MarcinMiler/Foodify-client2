@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, AsyncStorage } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -7,24 +7,25 @@ import HistoryOrder from '../Components/HistoryOrder'
 
 class HistoryOrderContainer extends Component {
 
-    componentDidMount() {
-        // this.props.myOrders.startPolling(10000)
-        this.subscribe()
+    componentDidMount = async () => {
+        this.unsubscribe = await this.subscribe()
     }
 
-    subscribe = () => {
-        this.props.myOrders.subscribeToMore({
+    componentWillUnmount() {
+        if (this.unsubscribe) this.unsubscribe()
+    }
+
+    subscribe = async () => {
+        let token = await AsyncStorage.getItem('token')
+        return this.props.myOrders.subscribeToMore({
             document: newStatusSubscription,
-            updateQuery: (prev, data) => {
-                console.log(prev, data, 'lol')
-            }
+            variables: { token }
         })
     }
 
     render() {
         const { navigation } = this.props
         const { myOrders } = this.props.myOrders
-        console.log(this.props, 'truck')
         return(
             <View>
                 { myOrders && <HistoryOrder navigation={navigation} orders={myOrders} /> }
@@ -52,8 +53,8 @@ const orderQuery = gql`
     }
 `
 const newStatusSubscription = gql`
-    subscription newStatus {
-        newStatus {
+    subscription newStatus($token: String!) {
+        newStatus(token: $token) {
             id
             clientID
             date
@@ -70,4 +71,4 @@ const newStatusSubscription = gql`
     }
 `
 
-export default graphql(orderQuery, { name: 'myOrders' })(HistoryOrderContainer)
+export default graphql(orderQuery, { name: 'myOrders', options: { fetchPolicy: 'network-only' } })(HistoryOrderContainer)

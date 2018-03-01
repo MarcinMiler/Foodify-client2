@@ -7,7 +7,6 @@ import Cart from '../Components/Cart'
 
 class CartContainer extends Component {
     render() {
-        console.log(this.props, 'cart')
         const { cart, totalPrice, deleteFromCart, updateQuantity, navigation } = this.props
         return <Cart products={cart} totalPrice={totalPrice} deleteFromCart={deleteFromCart} updateQuantity={updateQuantity} navigation={navigation} />
     }

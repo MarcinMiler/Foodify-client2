@@ -7,7 +7,8 @@ import Nav from '../Containers/NavContainer'
 const Address = ({
     navigation,
     changeState,
-    newOrder
+    newOrder,
+    error
 }) => (
     <LinearGradient style={styles.container} colors={['#AA00FF', '#CE31C4']}>
 
@@ -18,6 +19,8 @@ const Address = ({
             <View>
 
                 <Text style={styles.title}>Your address:</Text>
+
+                { error ? <View style={{margin: 10}}>{ error.map((e, i) => <Text style={styles.errorText} key={i}>{e}</Text>)}</View> : <View></View>}
 
                 <TextInput
                     style={styles.input}
@@ -45,9 +48,9 @@ const Address = ({
             </View>
 
             <View style={styles.wrap}>
-                <TouchableNativeFeedback onPress={() => {
-                    newOrder()
-                    navigation.navigate('Orders')
+                <TouchableNativeFeedback onPress={async () => {
+                    const res = await newOrder()
+                    if(res) navigation.navigate('Orders')
                 }}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Confirm Order</Text>
@@ -80,6 +83,11 @@ const styles = StyleSheet.create({
         fontFamily: 'montserratRegular',
         color: 'white',
         borderRadius: 3,
+    },
+    errorText: {
+        fontSize: 12,
+        color: 'white',
+        fontFamily: 'montserratRegular'
     },
     wrap: {
         justifyContent: 'center'

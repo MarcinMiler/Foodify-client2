@@ -30,21 +30,21 @@ const TypeFood = ({
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Fish')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='fish' size={75} color='white'/>
                         <Text style={styles.text}>Fish</Text>
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Sea food')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='prawn' size={75} color='white'/>
                         <Text style={styles.text}>Sea food</Text>
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Sushi')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='sushi' size={75} color='white'/>
                         <Text style={styles.text}>Sushi</Text>
