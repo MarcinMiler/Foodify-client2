@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableWithoutFeedback, Bu
 import { LinearGradient } from 'expo'
 import { Icon } from '../App'
 
+import CacheImage from './CacheImage'
 import Nav from '../Containers/NavContainer'
 
 const Cart = ({
@@ -17,7 +18,7 @@ const Cart = ({
             <View key={product.id} style={styles.product}>
                 
                 <View style={styles.wrapImage}>
-                    <Image style={styles.image} source={require('../Images/s2.png')} />
+                    <CacheImage style={styles.image} uri={`https://i.imgur.com/I9crUAO.png`} />
                 </View>
 
                 <View style={styles.description}>

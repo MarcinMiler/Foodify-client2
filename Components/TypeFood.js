@@ -16,14 +16,14 @@ const TypeFood = ({
 
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 
-                <TouchableNativeFeedback onPress={() => handleTouch('Salads')} delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Salad')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='salad' size={75} color='white'/>
                         <Text style={styles.text}>Salads</Text>
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback onPress={() => handleTouch('Meat')} delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => handleTouch('Dinner')} delayPressIn={0}>
                     <View style={styles.product}>
                         <Icon name='meat' size={75} color='white'/>
                         <Text style={styles.text}>Dinner</Text>

@@ -18,7 +18,7 @@ const Products = ({
                 <View style={styles.product}>
 
                     <View style={styles.wrapImage}>
-                        <CacheImage style={styles.image} uri={`http://192.168.8.101:4000/uploads/${product.url}`} />
+                        <CacheImage style={styles.image} uri={`https://i.imgur.com/I9crUAO.png`} />
                     </View>
 
                     <Text style={styles.name}>{product.name}</Text>

@@ -53,7 +53,7 @@ const Register = ({
 
         <View style={styles.item}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Login')}>
-                <View style={[styles.button, { marginTop: 120 }]}>
+                <View style={[styles.button, { marginTop: 150 }]}>
                     <Text style={styles.buttonText}>Login</Text>
                 </View>
             </TouchableWithoutFeedback>

@@ -29,7 +29,7 @@ const Drawer = ({
                     </View>
                 </TouchableNativeFeedback>
 
-                <TouchableNativeFeedback onPress={() => navigation.navigate('Cart')} delayPressIn={0}>
+                <TouchableNativeFeedback onPress={() => navigation.navigate('Cart2')} delayPressIn={0}>
                     <View style={styles.bodyItem}>
                         <Icon name='cart' size={25} color='white' />
                         <Text style={styles.bodyText}>Cart</Text>

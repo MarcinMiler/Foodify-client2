@@ -7,6 +7,7 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
 
+// const httpLink = new HttpLink({ uri: 'https://foodify-server.herokuapp.com/graphql' })
 const httpLink = new HttpLink({ uri: 'http://192.168.8.101:4000/graphql' })
 
 const authLink = setContext(async (_, { headers }) => {
@@ -19,11 +20,17 @@ const authLink = setContext(async (_, { headers }) => {
     }
 })
 
+// const wsLink = new WebSocketLink({
+//   uri: `ws://foodify-server.herokuapp.com/subscriptions`,
+//   options: {
+//     reconnect: true
+//   },
+// })
 const wsLink = new WebSocketLink({
   uri: `ws://192.168.8.101:4000/subscriptions`,
   options: {
     reconnect: true
-  },
+  }
 })
 
 const link = split(
